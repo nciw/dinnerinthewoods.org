@@ -70,7 +70,18 @@ $router->post('/checkout', function () {
     // Sum the cart totals
     $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution;
 
+    $uuid = \Ramsey\Uuid\Uuid::uuid1();
+
+    // Instantiate order object
     $order = R::dispense('orders');
+
+    // Check if credit checkout and valid
+    if ($_POST['paymentMethod'] == 0) {
+        // make payment
+        $order->stripe_token = '1234';
+        $stripeCustomerToken = '1234'; // For Guest entry
+    }
+
     $order->ticket_quantity = $originalTicketQty;
     $order->ticket_cents = $eventTicketPrice + $tableTicketPrice;
     $order->enhancer_quantity = $ticketEnhancerQty;
@@ -85,10 +96,27 @@ $router->post('/checkout', function () {
     $order->state = $_POST['state'];
     $order->zip = $_POST['zip'];
     $order->payment_type = $_POST['paymentMethod'];
-    $order->stripe_token = '1234';
-    $order->uuid = $_POST['firstName'];
-    $id = R::store($order);
-    var_dump($id);
+    $order->uuid = $uuid->toString();
+    $orderId = R::store($order);
+
+    $settings = R::load('settings', 1);
+    $settings->value = $settings->value - $originalTicketQty;
+    R::store($settings);
+
+    for ($i = 1; $i <= $originalTicketQty; $i++) {
+        $uuid = \Ramsey\Uuid\Uuid::uuid1();
+        $guest = R::dispense('guests');
+        // First guest is the person who went through checkout
+        if ($i === 1) {
+            $guest->name = $_POST['firstName'] . ' ' . $_POST['lastName'];
+            $guest->email = $_POST['email'];
+            $guest->stripe_id = $stripeCustomerToken;
+        }
+        $guest->order_id = $orderId;
+        $guest->uuid = $uuid->toString();
+        R::store($guest);
+        unset($guest, $uuid);
+    }
 });
 
 

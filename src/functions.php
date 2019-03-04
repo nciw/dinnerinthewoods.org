@@ -66,12 +66,13 @@ function shoppingCartLineItem($name, $price, $description = '')
 function eventPricing($qty)
 {
     $tableQty = 0;
-    $eventQty = 0;
 
     // If pricing is 8 or more then we need to factor in table reservations
     if ($qty > 7) {
         $tableQty = (int) ($qty / 8);
         $eventQty = $qty - ($tableQty * 8);
+    }else {
+        $eventQty = $qty;
     }
 
     return [$tableQty, $eventQty];

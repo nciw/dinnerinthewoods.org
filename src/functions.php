@@ -49,16 +49,38 @@ function shoppingCartLineItem($name, $price, $description = '')
                     <h6 class="my-0">' . $name . '</h6>
                     <small class="text-muted">' . $description . '</small>
                 </div>
-                <span class="text-muted">' . '$' . number_format(($price/100), 2) . '</span>
+                <span class="text-muted">' . '$' . number_format(($price / 100), 2) . '</span>
             </li>';
     }
 
+}
+
+/**
+ * Calculate table ticket price and event tickets based on quantity
+ *
+ * @param $qty integer Quantity of event tickets purchased
+ * @param $price integer Price of event tickets
+ * @param $tablePrice integer Price of table
+ * @return array
+ */
+function eventPricing($qty)
+{
+    $tableQty = 0;
+    $eventQty = 0;
+
+    // If pricing is 8 or more then we need to factor in table reservations
+    if ($qty > 7) {
+        $tableQty = (int) ($qty / 8);
+        $eventQty = $qty - ($tableQty * 8);
+    }
+
+    return [$tableQty, $eventQty];
 }
 
 function shoppingCartTotal($price)
 {
     echo '<li class="list-group-item d-flex justify-content-between">
                 <span>Total</span>
-                <strong>' . '$' . number_format(($price/100), 2) . '</strong>
+                <strong>' . '$' . number_format(($price / 100), 2) . '</strong>
             </li>';
 }

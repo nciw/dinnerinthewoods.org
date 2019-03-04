@@ -39,11 +39,13 @@ $router->post('/', function () {
 
     // Calculate totals
     $additionalContribution = convertPossibleFloatToCents($_POST['additionalContribution']);
+    list($tableTicketQty, $eventTicketQty) = eventPricing($eventTicketQty);
     $eventTicketPrice = convertPossibleFloatToCents($eventTicketQty * $_SERVER['EVENT_TICKET_PRICE']);
+    $tableTicketPrice = convertPossibleFloatToCents($tableTicketQty * $_SERVER['TABLE_TICKET_PRICE']);
     $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $ticketEnhancerPrice + $additionalContribution;
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution;
     include 'views/common/head.php';
     include 'views/step2.php';
     include 'views/common/footer.php';

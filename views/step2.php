@@ -5,6 +5,7 @@
             <span class="text-muted">Your cart</span>
         </h4>
         <ul class="list-group mb-3">
+            <?=shoppingCartLineItem('Table', $tableTicketPrice, $tableTicketQty . ' x table');?>
             <?=shoppingCartLineItem('Dinner', $eventTicketPrice, $eventTicketQty . ' x tickets');?>
             <?=shoppingCartLineItem('Ticket Enhancers', $ticketEnhancerPrice, $ticketEnhancerQty . ' x enhancers');?>
             <?=shoppingCartLineItem('Additional Contribution', $additionalContribution);?>

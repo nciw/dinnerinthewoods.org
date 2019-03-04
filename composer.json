@@ -1,0 +1,7 @@
+{
+    "require": {
+        "vlucas/phpdotenv": "^3.3",
+        "bramus/router": "~1.4",
+        "gabordemooij/redbean": "^5.2"
+    }
+}

@@ -5,23 +5,23 @@
             <span class="text-muted">Your cart</span>
         </h4>
         <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                    <h6 class="my-0">Product name</h6>
-                    <small class="text-muted">Brief description</small>
-                </div>
-                <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Total</span>
-                <strong>$20</strong>
-            </li>
+            <?=shoppingCartLineItem('Dinner', $eventTicketPrice, $eventTicketQty . ' x tickets');?>
+            <?=shoppingCartLineItem('Ticket Enhancers', $ticketEnhancerPrice, $ticketEnhancerQty . ' x enhancers');?>
+            <?=shoppingCartLineItem('Additional Contribution', $additionalContribution);?>
+            <?=shoppingCartTotal($cartTotal);?>
+
         </ul>
 
     </div>
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
         <form class="needs-validation" novalidate>
+            <?php
+            $eventTicketQty = getInteger($_POST['eventTicketQty']);
+            $ticketEnhancerQty = getInteger($_POST['ticketEnhancerQty']);
+            $additionalContribution = getInteger($_POST['additionalContribution']);
+            ?>
+            <input type="hidden" name="eventTicketQty" value="<?=$eventTicketQty?>" />
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>

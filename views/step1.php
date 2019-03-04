@@ -77,7 +77,7 @@
     </div>
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Your Order</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate method="POST">
 
             <div class="mb-3">
                 <label for="eventTickets">How many tickets would you like to purchase?</label>

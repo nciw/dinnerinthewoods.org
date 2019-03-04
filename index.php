@@ -15,6 +15,29 @@
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css">
+
+    <!-- Linked Data for the event -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mukwonago",
+          "addressRegion": "WI",
+          "postalCode": "53149",
+          "streetAddress": "W336 S8455 Hwy E"
+        },
+        "name": "Nature's Classroom Institute of Wisconsin"
+      },
+      "name": "Dinner in the Woods",
+      "startDate": "2019-06-01T17:30-06:00",
+      "endDate": "2019-06-02T00:00-06:00",
+      "description": "Annual Dinner in the Woods at Nature's classroom. Live Music. Local Food. Live & Silent Auctions"
+    }
+    </script>
 </head>
 
 <body>

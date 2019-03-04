@@ -26,6 +26,15 @@ addEventHandler(document, 'DOMContentLoaded', function () {
     // Fire update ticket prices on DOM Loaded
     updateTicketPricesOnDOM();
 
+    addEventHandler(document.getElementById('credit'), 'click', function() {
+       document.getElementById('checkDetails').style.display = 'none';
+       document.getElementById('creditDetails').style.display = '';
+    });
+    addEventHandler(document.getElementById('check'), 'click', function() {
+       document.getElementById('checkDetails').style.display = '';
+       document.getElementById('creditDetails').style.display = 'none';
+    });
+
 });
 
 function updateTicketPricesOnDOM() {

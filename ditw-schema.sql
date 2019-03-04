@@ -63,6 +63,8 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_quantity` int(11) NOT NULL,
   `enhancer_quantity` int(11) NOT NULL DEFAULT '0',
+  `ticket_cents` int(11) NOT NULL DEFAULT '0',
+  `enhancer_cents` int(11) NOT NULL DEFAULT '0',
   `additional_cents` int(11) NOT NULL DEFAULT '0',
   `total_cents` int(11) NOT NULL,
   `first_name` varchar(45) NOT NULL,

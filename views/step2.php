@@ -16,24 +16,26 @@
     </div>
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate method="POST" action="/checkout">
             <?php
             $eventTicketQty = getInteger($_POST['eventTicketQty']);
             $ticketEnhancerQty = getInteger($_POST['ticketEnhancerQty']);
             $additionalContribution = getInteger($_POST['additionalContribution']);
             ?>
             <input type="hidden" name="eventTicketQty" value="<?=$eventTicketQty?>" />
+            <input type="hidden" name="ticketEnhancerQty" value="<?=$ticketEnhancerQty?>" />
+            <input type="hidden" name="additionalContribution" value="<?=$additionalContribution?>" />
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="" required>
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="" required>
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -41,14 +43,14 @@
             </div>
             <div class="mb-3">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                 <div class="invalid-feedback">
                     Please enter a valid email address.
                 </div>
             </div>
             <div class="mb-3">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
                 <div class="invalid-feedback">
                     Please enter your address.
                 </div>
@@ -56,14 +58,14 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="" required>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="" required>
                     <div class="invalid-feedback">
                         City required.
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <label for="state">State</label>
-                    <select class="custom-select d-block w-100" id="state" required>
+                    <select class="custom-select d-block w-100" id="state" name="state" required>
                         <option value="AL">AL</option>
                         <option value="AK">AK</option>
                         <option value="AR">AR</option>
@@ -123,7 +125,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <label for="zip">Zip</label>
-                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                    <input type="text" class="form-control" id="zip" name="zip" required>
                     <div class="invalid-feedback">
                         Zip code required.
                     </div>
@@ -135,11 +137,11 @@
 
             <div class="d-block my-3">
                 <div class="custom-control custom-radio">
-                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" value="0" checked required>
                     <label class="custom-control-label" for="credit">Credit card</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input id="check" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <input id="check" name="paymentMethod" type="radio" class="custom-control-input" value="1" required>
                     <label class="custom-control-label" for="debit">Check/Cash</label>
                 </div>
             </div>

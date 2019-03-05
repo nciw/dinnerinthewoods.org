@@ -41,6 +41,9 @@ var card = elements.create('card', {style: style});
     // Handle form submission.
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
+    if (document.getElementById('paymentMethod').value == 1) {
+        form.submit();
+    }
     event.preventDefault();
 
     stripe.createToken(card).then(function(result) {

@@ -2,6 +2,9 @@
 
 use Bramus\Router\Router;
 use RedBeanPHP\R;
+use Stripe\Charge;
+use Stripe\Customer;
+use Stripe\Stripe;
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/src/functions.php';
@@ -76,10 +79,22 @@ $router->post('/checkout', function () {
     $order = R::dispense('orders');
 
     // Check if credit checkout and valid
+    $stripeCustomerToken = null;
     if ($_POST['paymentMethod'] == 0) {
+        Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
+        $customer = Customer::create([
+            "description" => $_POST['firstName'] . ' ' . $_POST['lastName'] . ' - ' . $_POST['email'],
+            "source" => $_POST['stripeToken'], // obtained with Stripe.js
+        ]);
+        // Charge the Customer instead of the card:
+        $charge = Charge::create([
+            'amount' => $cartTotal,
+            'currency' => 'usd',
+            'customer' => $customer->id,
+        ]);
         // make payment
-        $order->stripe_token = '1234';
-        $stripeCustomerToken = '1234'; // For Guest entry
+        $order->stripe_token = $charge->id;
+        $stripeCustomerToken = $customer->id; // For Guest entry
     }
 
     $order->ticket_quantity = $originalTicketQty;

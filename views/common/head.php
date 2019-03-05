@@ -8,6 +8,7 @@
 
     <title>Dinner in the Woods 2019 - Tickets on sale March 15th!</title>
 
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">

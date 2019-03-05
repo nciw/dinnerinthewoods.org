@@ -29,5 +29,8 @@
         }, false);
     })();
 </script>
+<script type="application/javascript">
+    <?php include 'stripe.php'; ?>
+</script>
 </body>
 </html>

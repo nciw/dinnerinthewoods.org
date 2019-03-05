@@ -5,10 +5,18 @@ addEventHandler(document, 'DOMContentLoaded', function () {
     addEventHandler(document.getElementById('credit'), 'click', function() {
        document.getElementById('checkDetails').style.display = 'none';
        document.getElementById('creditDetails').style.display = '';
+       document.getElementById('cc-number').required = true;
+       document.getElementById('cc-name').required = true;
+       document.getElementById('cc-expiration').required = true;
+       document.getElementById('cc-cvv').required = true;
     });
     addEventHandler(document.getElementById('check'), 'click', function() {
        document.getElementById('checkDetails').style.display = '';
        document.getElementById('creditDetails').style.display = 'none';
+        document.getElementById('cc-number').required = false;
+        document.getElementById('cc-name').required = false;
+        document.getElementById('cc-expiration').required = false;
+        document.getElementById('cc-cvv').required = false;
     });
 
 });

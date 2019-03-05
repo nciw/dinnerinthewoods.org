@@ -2,44 +2,46 @@
 <div class="row">
     <div class="col-md-12 order-md-1">
         <h3 class="mb-3">Your ticket information</h3>
+        <form class="needs-validation" novalidate method="POST">
+        <input type="hidden" name="uuid" value="<?=$order->uuid?>">
         <?php
         $i = 0;
         foreach ($guests as $guest) {
             $i++;
         ?>
-
+        <input type="hidden" name="guests[<?=$i?>][id]" value="<?=$guest->id;?>" >
+        <input type="hidden" name="guestsArray[]" value="<?=$guest->id;?>" >
         <h5 class="mb-3">Guest #<?=$i?> <small><?=(is_null($guest->table)) ? '' : 'Table #' . $guest->table; ?><?=(is_null($guest->paddle)) ? '' : ', Paddle #' . $guest->paddle; ?></small></h5>
-        <form class="needs-validation" novalidate method="POST">
             <div class="row">
                 <div class="col-md-2 mb-3">
-                    <label for="firstName">Full name</label>
-                    <input type="text" class="form-control" id="firstName" value="<?=$guest->name?>">
+                    <label for="name">Full name</label>
+                    <input name="guests[<?=$i?>][name]" type="text" class="form-control" id="name" value="<?=$guest->name?>">
                 </div>
                 <div class="col-md-2 mb-3">
                     <label for="lastName">Email</label>
-                    <input type="text" class="form-control" id="email" value="<?=$guest->email?>">
+                    <input name="guests[<?=$i?>][email]" type="text" class="form-control" id="email" value="<?=$guest->email?>">
                 </div>
                 <div class="col-md-2 mb-3">
                     <label for="lastName">Phone</label>
-                    <input type="text" class="form-control" id="phone" value="<?=$guest->phone?>">
+                    <input name="guests[<?=$i?>][phone]" type="text" class="form-control" id="phone" value="<?=$guest->phone?>">
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="lastName">Childcare?</label>
-                    <select class="form-control" name="childcare">
+                    <label for="childcare">Childcare?</label>
+                    <select class="form-control" name="guests[<?=$i?>][childcare]">
                         <option value="0" <?php if (false == $guest->childcare) { echo 'selected'; } ?>>No</option>
                         <option value="1" <?php if (true == $guest->childcare) { echo 'selected'; } ?>>Yes</option>
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="lastName">Valet?</label>
-                    <select class="form-control" name="valet">
+                    <label for="valet">Valet?</label>
+                    <select class="form-control" name="guests[<?=$i?>][valet]">
                         <option value="0" <?php if (false == $guest->valet) { echo 'selected'; } ?>>No</option>
                         <option value="1" <?php if (true == $guest->valet) { echo 'selected'; } ?>>Yes</option>
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="lastName">Restrictions?</label>
-                    <select class="form-control" name="restrictions">
+                    <label for="restrictions">Restrictions?</label>
+                    <select class="form-control" name="guests[<?=$i?>][restrictions]">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>
                         <option value="1" <?php if (1 == $guest->restrictions) { echo 'selected'; } ?>>Vegetarian</option>
                         <option value="2" <?php if (2 == $guest->restrictions) { echo 'selected'; } ?>>Vegan</option>

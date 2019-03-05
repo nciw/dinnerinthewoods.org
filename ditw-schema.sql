@@ -75,7 +75,7 @@ CREATE TABLE `orders` (
   `state` varchar(45) NOT NULL,
   `zip` varchar(45) NOT NULL,
   `payment_type` int(11) NOT NULL DEFAULT '0',
-  `stripe_token` varchar(64) NOT NULL,
+  `stripe_token` varchar(64) NULL,
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `uuid` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),

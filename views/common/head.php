@@ -44,8 +44,11 @@
 
 <div class="website">
     <div class="gridStyle container">
+        <div class="pad-25-top pad-15-left">
+            <a href="/" class="btn-primary btn">Home</a>
+        </div>
         <div class="py-5 text-center">
-            <h4 class="pad-25-top">Nature's Classroom Institute & Montessori School Presents</h4>
+            <h4>Nature's Classroom Institute & Montessori School Presents</h4>
             <img src="/images/logo.png" alt="Dinner in the Woods Event Logo">
             <h1>Dinner in the Woods</h1>
             <h5>Live Music · Local Food · Live & Silent Auction · Cabanas</h5>

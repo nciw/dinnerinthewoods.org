@@ -144,12 +144,12 @@
 
             <div class="d-block my-3">
                 <div class="custom-control custom-radio">
-                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" value="0" checked required>
-                    <label class="custom-control-label" for="credit">Credit card</label>
+                    <input id="credit" name="paymentMethod" type="radio" value="0" checked required>
+                    <label for="credit">Credit card</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input id="check" name="paymentMethod" type="radio" class="custom-control-input" value="1" required>
-                    <label class="custom-control-label" for="debit">Check/Cash</label>
+                    <input id="check" name="paymentMethod" type="radio" value="1" required>
+                    <label for="debit">Check/Cash</label>
                 </div>
             </div>
             <div class="row" id="checkDetails" style="display: none">

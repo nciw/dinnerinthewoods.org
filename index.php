@@ -70,7 +70,7 @@ $router->post('/checkout', function () {
     // Sum the cart totals
     $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution;
 
-    $uuid = \Ramsey\Uuid\Uuid::uuid1();
+    $redirectUuid = $uuid = \Ramsey\Uuid\Uuid::uuid1();
 
     // Instantiate order object
     $order = R::dispense('orders');
@@ -110,6 +110,7 @@ $router->post('/checkout', function () {
         if ($i === 1) {
             $guest->name = $_POST['firstName'] . ' ' . $_POST['lastName'];
             $guest->email = $_POST['email'];
+            $guest->phone = $_POST['phone'];
             $guest->stripe_id = $stripeCustomerToken;
         }
         $guest->order_id = $orderId;
@@ -117,8 +118,15 @@ $router->post('/checkout', function () {
         R::store($guest);
         unset($guest, $uuid);
     }
+
+    header('Location: /manage/' . $redirectUuid->toString());
 });
 
+$router->get('/manage/{uuid}', function ($uuid) {
+    $order = R::findOne('orders', ' uuid = ?', [$uuid]);
+    $guests = R::findAll('guests', ' order_id = ?', [$order->id]);
+    var_dump($order,$guests);
+});
 
 // Run it!
 $router->run();

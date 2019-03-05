@@ -49,6 +49,13 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label for="phone">Phone</label>
+                <input type="phone" class="form-control" id="phone" name="phone" required>
+                <div class="invalid-feedback">
+                    Please enter a valid phone number.
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="address">Address</label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
                 <div class="invalid-feedback">

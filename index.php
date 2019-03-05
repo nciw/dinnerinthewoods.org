@@ -125,7 +125,9 @@ $router->post('/checkout', function () {
 $router->get('/manage/{uuid}', function ($uuid) {
     $order = R::findOne('orders', ' uuid = ?', [$uuid]);
     $guests = R::findAll('guests', ' order_id = ?', [$order->id]);
-    var_dump($order,$guests);
+    include 'views/common/head.php';
+    include 'views/guestlist.php';
+    include 'views/common/footer.php';
 });
 
 // Run it!

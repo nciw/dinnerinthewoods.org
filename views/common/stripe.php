@@ -41,7 +41,7 @@ var card = elements.create('card', {style: style});
     // Handle form submission.
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
-    if (document.getElementById('paymentMethod').value == 1) {
+    if (document.getElementById('check').checked) {
         form.submit();
     }
     event.preventDefault();

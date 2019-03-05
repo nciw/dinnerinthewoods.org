@@ -15,11 +15,15 @@ $dotenv->load();
 $dotenv->required([
     'EVENT_TICKET_PRICE',
     'ENHANCER_TICKET_PRICE',
+    'CHILDCARE_PRICE',
+    'CABANA_PRICE',
     'DB_HOST',
     'DB_NAME',
     'DB_USER',
     'DB_PASS',
     'POSTMARK_API_KEY',
+    'STRIPE_API_SECRET_KEY',
+    'STRIPE_API_PUBLIC_KEY',
 ]);
 
 $router = new Router();

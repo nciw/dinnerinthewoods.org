@@ -11,23 +11,23 @@
                         <table>
                             <tr>
                                 <td>Dinner ticket</td>
-                                <td>$<span id="eventTicketPrice">0</span></td>
+                                <td>$<?=$_SERVER['EVENT_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
                                 <td>Table for eight</td>
-                                <td>$<span id="tablePrice">0</span></td>
+                                <td>$<?=$_SERVER['TABLE_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
                                 <td>Ticket enhancer (10 pack)</td>
-                                <td>$<span id="ticketEnhancerPrice">0</span></td>
+                                <td>$<?=$_SERVER['ENHANCER_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
                                 <td>Childcare</td>
-                                <td>$<span id="childcarePrice">0</span> per child</td>
+                                <td>$<?=$_SERVER['CHILDCARE_PRICE']?> per child</td>
                             </tr>
                             <tr>
                                 <td>Cabana</td>
-                                <td>$<span id="cabanaPrice">0</span></td>
+                                <td>$<?=$_SERVER['CABANA_PRICE']?></td>
                             </tr>
                         </table>
 
@@ -81,13 +81,13 @@
 
             <div class="mb-3">
                 <label for="eventTickets">How many tickets would you like to purchase?</label>
-                <p class="text-muted">$<span id="eventTicketPrice2">0</span> each or purchase eight tickets to
-                    reserve a table for $<span id="tablePrice2">0</span></p>
+                <p class="text-muted">$<?=$_SERVER['EVENT_TICKET_PRICE']?> each or purchase eight tickets to
+                    reserve a table for $<?=$_SERVER['TABLE_TICKET_PRICE']?></p>
                 <input type="number" class="form-control" id="eventTicketQty" name="eventTicketQty" value="1">
             </div>
             <div class="mb-3">
                 <label for="enhancerTickets">How many ticket enhancers would you like?</label>
-                <p class="text-muted">$<span id="ticketEnhancerPrice2">0</span> per 10 pack of tickets.</p>
+                <p class="text-muted">$<?=$_SERVER['ENHANCER_TICKET_PRICE']?> sold in packs of 10 tickets.</p>
                 <input type="number" class="form-control" id="ticketEnhancerQty" name="ticketEnhancerQty">
             </div>
             <div class="mb-3">

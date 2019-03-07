@@ -7,7 +7,7 @@
         <ul class="list-group mb-3">
             <?=shoppingCartLineItem('Table', $tableTicketPrice, $tableTicketQty . ' x table');?>
             <?=shoppingCartLineItem('Dinner', $eventTicketPrice, $eventTicketQty . ' x tickets');?>
-            <?=shoppingCartLineItem('Cabana', $cabanaReservation);?>
+            <?=shoppingCartLineItem('Cabana', ($cabanaReservation * $_SERVER['CABANA_PRICE']));?>
             <?=shoppingCartLineItem('Ticket Enhancers', $ticketEnhancerPrice, $ticketEnhancerQty . ' x enhancers');?>
             <?=shoppingCartLineItem('Add\'l Contribution', $additionalContribution);?>
             <?=shoppingCartTotal($cartTotal);?>

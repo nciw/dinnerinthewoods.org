@@ -83,7 +83,12 @@
                 <label for="eventTickets">How many tickets would you like to purchase?</label>
                 <p class="text-muted">$<?=$_SERVER['EVENT_TICKET_PRICE']?> each or purchase eight tickets to
                     reserve a table for $<?=$_SERVER['TABLE_TICKET_PRICE']?></p>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Tickets</div>
+                    </div>
                 <input type="number" class="form-control" id="eventTicketQty" name="eventTicketQty" value="1">
+                </div>
             </div>
             <div class="mb-3">
                 <label for="enhancerTickets">How many packs of ticket enhancers would you like?</label>

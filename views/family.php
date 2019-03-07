@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin-top: 50px">
     <div class="col-md-12 mb-12">
         <div class="mb-12 text-center">
             <h3>Are you a current NCI family or alum?</h3>

@@ -56,7 +56,7 @@
 
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">Is anything included with the table purchase?</h6>
+                    <h6 class="my-0">What is included with a table?</h6>
                     <small class="text-muted">Your party will enjoy two bottles of complimentary wine.</small>
                 </div>
             </li>

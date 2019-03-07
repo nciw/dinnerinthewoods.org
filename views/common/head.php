@@ -42,7 +42,10 @@
 </head>
 
 <body>
-
+<?php
+$settings = \RedBeanPHP\R::load('settings', 1);
+$tickets = $settings->value;
+?>
 <div class="website">
     <div class="gridStyle container">
         <div class="pad-25-top pad-15-left">
@@ -52,6 +55,11 @@
         <div class="alert alert-warning" role="alert">
             Pricing increases on April 1st! Buy tickets now!
         </div>
+        <?php if ($tickets <= 25) { ?>
+            <div class="alert alert-danger" role="alert">
+                <strong>Hurry!</strong> Only <?=$tickets?> tickets remaining!
+            </div>
+        <?php } ?>
         <div class="text-center">
             <h4>Nature's Classroom Institute & Montessori School Presents</h4>
             <img src="/images/ditw-logo.png" alt="Dinner in the Woods">

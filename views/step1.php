@@ -81,6 +81,17 @@
                     </small>
                 </div>
             </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">Where is the event?</h6>
+                    <small class="text-muted">
+                        The event is hosted at Nature's Classroom and located at<br/>
+                        <a href="https://goo.gl/maps/LQPvQf9Ndh82" target="_blank">
+                            W336 S8455 Hwy E<br/>Mukwonago, WI 53149
+                        </a>
+                    </small>
+                </div>
+            </li>
 
         </ul>
 

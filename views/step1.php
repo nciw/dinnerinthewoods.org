@@ -43,6 +43,16 @@
                     </small>
                 </div>
             </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">What is a cabana?</h6>
+                    <small class="text-muted">
+                        A cabana rental is a private rustically decorated space for you to continue
+                        enjoying the Dinner in the Woods experience after the main dinner. A pitcher of
+                        signature cocktail and a gourmet dessert is provided with the rental.
+                    </small>
+                </div>
+            </li>
 
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>

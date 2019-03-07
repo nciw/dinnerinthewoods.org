@@ -54,5 +54,6 @@
             <h1>Dinner in the Woods</h1>
             <h5>Live Music · Local Food · Live & Silent Auction · Cabanas</h5>
             <h5>Saturday June 1st, 2019 5:00pm-11:30pm</h5>
+            <h5>W336 S8455 Hwy E, Mukwonago, WI 53149</h5>
 
         </div>

@@ -66,6 +66,7 @@ CREATE TABLE `orders` (
   `ticket_cents` int(11) NOT NULL DEFAULT '0',
   `enhancer_cents` int(11) NOT NULL DEFAULT '0',
   `additional_cents` int(11) NOT NULL DEFAULT '0',
+  `cabana_cents` INT(11) NOT NULL DEFAULT '0',
   `total_cents` int(11) NOT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,

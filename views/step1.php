@@ -117,6 +117,21 @@
                 <input type="number" class="form-control" id="ticketEnhancerQty" name="ticketEnhancerQty">
             </div>
             <div class="mb-3">
+                <label for="cabanaReservation">Would you like to reserve a cabana?</label>
+                <p class="text-muted">Private cabanas available for $<?=$_SERVER['CABANA_PRICE']?></p>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="yes" name="cabanaReservation" type="radio" value="0" checked required>
+                        <label for="no">No</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="yes" name="cabanaReservation" type="radio" value="1" required>
+                        <label for="yes">Yes</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="enhancerTickets">Would you like to make a one-time contribution to support our mission
                     in teaching independence, mastery of self, and the environment?</label>
                 <div class="input-group mb-2">

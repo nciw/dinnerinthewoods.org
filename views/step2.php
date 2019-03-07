@@ -7,8 +7,9 @@
         <ul class="list-group mb-3">
             <?=shoppingCartLineItem('Table', $tableTicketPrice, $tableTicketQty . ' x table');?>
             <?=shoppingCartLineItem('Dinner', $eventTicketPrice, $eventTicketQty . ' x tickets');?>
+            <?=shoppingCartLineItem('Cabana', $cabanaReservation);?>
             <?=shoppingCartLineItem('Ticket Enhancers', $ticketEnhancerPrice, $ticketEnhancerQty . ' x enhancers');?>
-            <?=shoppingCartLineItem('Additional Contribution', $additionalContribution);?>
+            <?=shoppingCartLineItem('Add\'l Contribution', $additionalContribution);?>
             <?=shoppingCartTotal($cartTotal);?>
 
         </ul>
@@ -21,10 +22,12 @@
             $eventTicketQty = getInteger($_POST['eventTicketQty']);
             $ticketEnhancerQty = getInteger($_POST['ticketEnhancerQty']);
             $additionalContribution = getInteger($_POST['additionalContribution']);
+            $cabanaReservation = getInteger($_POST['cabanaReservation']);
             ?>
             <input type="hidden" name="eventTicketQty" value="<?=$eventTicketQty?>" />
             <input type="hidden" name="ticketEnhancerQty" value="<?=$ticketEnhancerQty?>" />
             <input type="hidden" name="additionalContribution" value="<?=$additionalContribution?>" />
+            <input type="hidden" name="cabanaReservation" value="<?=$cabanaReservation?>" />
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>

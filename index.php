@@ -61,13 +61,14 @@ $router->post('/', function () {
 
     // Calculate totals
     $additionalContribution = convertPossibleFloatToCents($_POST['additionalContribution']);
+    $cabanaReservation = convertPossibleFloatToCents($_POST['cabanaReservation']);
     list($tableTicketQty, $eventTicketQty) = eventPricing($eventTicketQty);
     $eventTicketPrice = convertPossibleFloatToCents($eventTicketQty * $_SERVER['EVENT_TICKET_PRICE']);
     $tableTicketPrice = convertPossibleFloatToCents($tableTicketQty * $_SERVER['TABLE_TICKET_PRICE']);
     $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution;
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + $cabanaReservation;
     include 'views/common/head.php';
     include 'views/step2.php';
     include 'views/common/footer.php';
@@ -85,9 +86,10 @@ $router->post('/checkout', function () {
     $eventTicketPrice = convertPossibleFloatToCents($eventTicketQty * $_SERVER['EVENT_TICKET_PRICE']);
     $tableTicketPrice = convertPossibleFloatToCents($tableTicketQty * $_SERVER['TABLE_TICKET_PRICE']);
     $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
+    $cabanaReservation = $_POST['cabanaReservation'] > 0 ? convertPossibleFloatToCents($_SERVER['CABANA_PRICE']) : 0;
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution;
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + $cabanaReservation;
 
     $redirectUuid = $uuid = \Ramsey\Uuid\Uuid::uuid1();
 
@@ -118,6 +120,7 @@ $router->post('/checkout', function () {
     $order->enhancer_quantity = $ticketEnhancerQty;
     $order->enhancer_cents = $ticketEnhancerPrice;
     $order->additional_cents = $additionalContribution;
+    $order->cabana_cents = $cabanaReservation;
     $order->total_cents = $cartTotal;
     $order->first_name = $_POST['firstName'];
     $order->last_name = $_POST['lastName'];

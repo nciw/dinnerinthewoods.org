@@ -36,7 +36,19 @@ $router->set404(function () {
 });
 
 // Static route: / (homepage)
-$router->get('/', function () {
+$router->get('/', function(){
+    include 'views/common/head.php';
+    include 'views/family.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/notify', function(){
+    include 'views/common/head.php';
+    include 'views/notify.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/step-1', function () {
     include 'views/common/head.php';
     include 'views/step1.php';
     include 'views/common/footer.php';

@@ -75,7 +75,7 @@ $router->post('/', function () {
     $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + $cabanaReservation;
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + ($cabanaReservation * $_SERVER['CABANA_PRICE']);
     include 'views/common/head.php';
     include 'views/step2.php';
     include 'views/common/footer.php';
@@ -96,7 +96,7 @@ $router->post('/checkout', function () {
     $cabanaReservation = $_POST['cabanaReservation'] > 0 ? convertPossibleFloatToCents($_SERVER['CABANA_PRICE']) : 0;
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + $cabanaReservation;
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + ($cabanaReservation * $_SERVER['CABANA_PRICE']);
 
     $redirectUuid = $uuid = \Ramsey\Uuid\Uuid::uuid1();
 

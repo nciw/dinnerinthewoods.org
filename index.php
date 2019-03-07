@@ -160,7 +160,7 @@ $router->post('/checkout', function () {
         unset($guest, $uuid);
     }
 
-    header('Location: /manage/' . $redirectUuid->toString());
+    header('Location: /thank-you/' . $redirectUuid->toString());
 });
 
 $router->get('/manage/{uuid}', function ($uuid) {
@@ -209,7 +209,7 @@ $router->post('/manage/{uuid}', function ($uuid) {
         }
     }
 
-    header('Location: /thank-you/'.$uuid);
+    header('Location: /manage/'.$uuid);
 });
 
 // Run it!

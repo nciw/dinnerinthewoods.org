@@ -164,6 +164,14 @@ $router->get('/manage/{uuid}', function ($uuid) {
     include 'views/common/footer.php';
 });
 
+$router->get('/thank-you/{uuid}', function ($uuid) {
+    $order = R::findOne('orders', ' uuid = ?', [$uuid]);
+    $guests = R::findAll('guests', ' order_id = ?', [$order->id]);
+    include 'views/common/head.php';
+    include 'views/thankyou.php';
+    include 'views/common/footer.php';
+});
+
 $router->post('/manage/{uuid}', function ($uuid) {
     if ($uuid !== $_POST['uuid']) {
         throw new Exception('Invalid form submission', 400);
@@ -188,7 +196,7 @@ $router->post('/manage/{uuid}', function ($uuid) {
         }
     }
 
-    header('Location: /manage/'.$uuid);
+    header('Location: /thank-you/'.$uuid);
 });
 
 // Run it!

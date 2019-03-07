@@ -45,6 +45,7 @@
 <?php
 $settings = \RedBeanPHP\R::load('settings', 1);
 $tickets = $settings->value;
+
 ?>
 <div class="website">
     <div class="gridStyle container">

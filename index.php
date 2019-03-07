@@ -37,6 +37,13 @@ $router->set404(function () {
 
 // Static route: / (homepage)
 $router->get('/', function(){
+    $settings = \RedBeanPHP\R::load('settings', 1);
+    $tickets = $settings->value;
+
+    if ($tickets <= 0) {
+        header('Location: /sold-out');
+    }
+
     include 'views/common/head.php';
     include 'views/family.php';
     include 'views/common/footer.php';
@@ -169,6 +176,12 @@ $router->get('/thank-you/{uuid}', function ($uuid) {
     $guests = R::findAll('guests', ' order_id = ?', [$order->id]);
     include 'views/common/head.php';
     include 'views/thankyou.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/sold-out', function () {
+    include 'views/common/head.php';
+    include 'views/soldout.php';
     include 'views/common/footer.php';
 });
 

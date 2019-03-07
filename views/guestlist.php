@@ -33,14 +33,7 @@
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="valet">Valet?</label>
-                    <select class="form-control" name="guests[<?=$i?>][valet]">
-                        <option value="0" <?php if (false == $guest->valet) { echo 'selected'; } ?>>No</option>
-                        <option value="1" <?php if (true == $guest->valet) { echo 'selected'; } ?>>Yes</option>
-                    </select>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <label for="restrictions">Restrictions?</label>
+                    <label for="restrictions">Food restrictions?</label>
                     <select class="form-control" name="guests[<?=$i?>][restrictions]">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>
                         <option value="1" <?php if (1 == $guest->restrictions) { echo 'selected'; } ?>>Vegetarian</option>

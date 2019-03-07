@@ -86,8 +86,8 @@
                 <input type="number" class="form-control" id="eventTicketQty" name="eventTicketQty" value="1">
             </div>
             <div class="mb-3">
-                <label for="enhancerTickets">How many ticket enhancers would you like?</label>
-                <p class="text-muted">$<?=$_SERVER['ENHANCER_TICKET_PRICE']?> sold in packs of 10 tickets.</p>
+                <label for="enhancerTickets">How many packs of ticket enhancers would you like?</label>
+                <p class="text-muted">$<?=$_SERVER['ENHANCER_TICKET_PRICE']?> per pack. Sold in packs of 10 tickets.</p>
                 <input type="number" class="form-control" id="ticketEnhancerQty" name="ticketEnhancerQty">
             </div>
             <div class="mb-3">

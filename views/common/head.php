@@ -48,6 +48,10 @@
         <div class="pad-25-top pad-15-left">
             <a href="/" class="btn-primary btn">Home</a>
         </div>
+        <br/>
+        <div class="alert alert-warning" role="alert">
+            Pricing increases on April 1st! Buy tickets now!
+        </div>
         <div class="py-5 text-center">
             <h4>Nature's Classroom Institute & Montessori School Presents</h4>
             <img src="/images/logo.png" alt="Dinner in the Woods Event Logo">

@@ -1,7 +1,7 @@
 
 <?php
 if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
-    <div class="alert alert-success" role="alert">Guest list is saved!</div>
+    <div class="alert alert-success" role="alert">Thank You for submitting your guest information. You may update it at a later time should you need to.</div>
 
 <?php }?>
 <div class="row">
@@ -40,7 +40,7 @@ if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="restrictions">Food restrictions?</label>
+                    <label for="restrictions">Food preferences?</label>
                     <select class="form-control" name="guests[<?=$i?>][restrictions]">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>
                         <option value="1" <?php if (1 == $guest->restrictions) { echo 'selected'; } ?>>Vegetarian</option>

@@ -165,15 +165,6 @@ $router->post('/checkout', function () {
 
     $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
 
-    /**
-    $additionalContribution = convertPossibleFloatToCents($_POST['additionalContribution']);
-    list($tableTicketQty, $eventTicketQty) = eventPricing($eventTicketQty);
-    $eventTicketPrice = convertPossibleFloatToCents($eventTicketQty * $_SERVER['EVENT_TICKET_PRICE']);
-    $tableTicketPrice = convertPossibleFloatToCents($tableTicketQty * $_SERVER['TABLE_TICKET_PRICE']);
-    $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
-    $cabanaReservation = $_POST['cabanaReservation'] > 0 ? convertPossibleFloatToCents($_SERVER['CABANA_PRICE']) : 0;
-
-     */
     $orderedItems = [];
     if ($eventTicketQty > 0) {
         array_push($orderedItems, ['description' => $eventTicketQty . ' x Dinner tickets', 'amount' => '$' . number_format(($eventTicketPrice / 100), 2)]);

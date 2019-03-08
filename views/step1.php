@@ -1,3 +1,14 @@
+<div class="alert alert-warning" role="alert">
+    Pricing increases on April 1st! Buy tickets now!
+</div>
+<?php
+$settings = \RedBeanPHP\R::load('settings', 1);
+$tickets = $settings->value;
+if ($tickets <= 25) { ?>
+    <div class="alert alert-danger" role="alert">
+        <strong>Hurry!</strong> Only <?=$tickets?> tickets remaining!
+    </div>
+<?php } ?>
 <div class="row">
     <div class="col-md-4 order-md-1 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -74,7 +85,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">Where is the event?</h6>
+                    <h6 class="my-0">Where is the Event?</h6>
                     <small class="text-muted">
                         The event is hosted at Nature's Classroom and located at<br/>
                         <a href="https://goo.gl/maps/LQPvQf9Ndh82" target="_blank">

@@ -6,28 +6,28 @@
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">How much is the event?</h6>
+                    <h6 class="my-0">What are Ticket Prices?</h6>
                     <small class="text-muted">
                         <table>
                             <tr>
-                                <td>Dinner ticket</td>
+                                <td>A Dinner Ticket</td>
                                 <td>$<?=$_SERVER['EVENT_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
-                                <td>Table for eight</td>
+                                <td>A Table for 8</td>
                                 <td>$<?=$_SERVER['TABLE_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
-                                <td>Ticket enhancer (10 pack)</td>
+                                <td>A Pack of 10 Ticket Enhancers</td>
                                 <td>$<?=$_SERVER['ENHANCER_TICKET_PRICE']?></td>
-                            </tr>
-                            <tr>
-                                <td>Childcare</td>
-                                <td>$<?=$_SERVER['CHILDCARE_PRICE']?> per child</td>
                             </tr>
                             <tr>
                                 <td>Cabana</td>
                                 <td>$<?=$_SERVER['CABANA_PRICE']?></td>
+                            </tr>
+                            <tr>
+                                <td>Childcare (per child)</td>
+                                <td>$<?=$_SERVER['CHILDCARE_PRICE']?></td>
                             </tr>
                         </table>
 
@@ -36,37 +36,23 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">What is included with a ticket?</h6>
-                    <small class="text-muted">Entrance into the event, appetizers, dessert, and dinner is
-                        included. Ticket
-                        enhancers may be purchased for drinks and other onsite activities.
+                    <h6 class="my-0">What is Included with a Ticket?</h6>
+                    <small class="text-muted">The purchase of your ticket includes entrance into the event, appetizers, dinner and dessert.
                     </small>
                 </div>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">What is a cabana?</h6>
-                    <small class="text-muted">
-                        A cabana rental is a private rustically decorated space for you to continue
-                        enjoying the Dinner in the Woods experience after the main dinner. A pitcher of
-                        signature cocktail and a gourmet dessert is provided with the rental.
-                    </small>
+                    <h6 class="my-0">What is Included with a Table?</h6>
+                    <small class="text-muted">Your party of 8 will enjoy two bottles of wine (one red and one white) or non-alcoholic beverage of your choice.</small>
                 </div>
             </li>
-
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">What is included with a table?</h6>
-                    <small class="text-muted">Your party will enjoy two bottles of complimentary wine.</small>
-                </div>
-            </li>
-
-
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                    <h6 class="my-0">What is a ticket enhancer?</h6>
-                    <small class="text-muted">Ticket enhancers are used for drinks, the egg pull, and the wine
-                        pull while at the event. It is sold as a 10 pack of tickets.<br/>
+                    <h6 class="my-0">What are Ticket Enhancers For?</h6>
+                    <small class="text-muted">Ticket enhancers can be used for drinks, the Egg Pull and the Wine Pull.
+                        Each pack includes 10 tickets. Here is a breakdown of the cost for each item to help guide
+                        how many packs of ticket enhancers you will need for the event:<br/>
                         <br/>Drinks - 4 tickets
                         <br/>Wine Pull - 3 tickets
                         <br/>Egg Pull - 2 tickets
@@ -75,9 +61,14 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">Is childcare offered?</h6>
-                    <small class="text-muted">Only to NCM enrolled students. Childcare will include pizza and
-                        dessert.
+                    <h6 class="my-0">What is Included with a Cabana?</h6>
+                    <small class="text-muted">This private, after dinner party area will be available for you and your party to enjoy a pitcher of our signature cocktail and a gourmet dessert. Each cabana can host up to 8 family members/friends.</small>
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">What is Included in Childcare?</h6>
+                    <small class="text-muted">Childcare is only offered to NCI-MS enrolled students and their families. Childcare will include pizza and a dessert.
                     </small>
                 </div>
             </li>

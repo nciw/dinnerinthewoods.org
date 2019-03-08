@@ -13,7 +13,7 @@
             <a href="/step-1" class="btn btn-success">Yes</a>&nbsp;
             <a href="/notify">No</a>
         </div>
-
+        <br/><br/>
     </div>
 
 </div>

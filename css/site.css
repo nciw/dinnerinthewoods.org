@@ -75,3 +75,10 @@ h4 {
     max-width: 100%;
     height: auto;
 }
+
+footer {
+    margin-top: -15px;
+    background: rgba(41, 41, 41);
+    color: #8c7e73;
+    width: 100%;
+}

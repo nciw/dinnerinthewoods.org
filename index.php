@@ -209,7 +209,7 @@ $router->post('/manage/{uuid}', function ($uuid) {
         }
     }
 
-    header('Location: /manage/'.$uuid);
+    header('Location: /manage/'. $uuid . '?alert=success');
 });
 
 // Run it!

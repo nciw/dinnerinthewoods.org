@@ -1,7 +1,14 @@
 
+<?php
+if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
+    <div class="alert alert-success" role="alert">Guest list is saved!</div>
+
+<?php }?>
 <div class="row">
     <div class="col-md-12 order-md-1">
         <h3 class="mb-3">Your ticket information</h3>
+        <p>When you update your guest information they will be signed up for event emails and also receive a login to manage their profile. This will allow
+        them to save their credit card information for faster checkout at the event. The email that we send them will include your contact information.</p>
         <form class="needs-validation" novalidate method="POST">
         <input type="hidden" name="uuid" value="<?=$order->uuid?>">
         <?php

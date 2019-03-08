@@ -184,10 +184,10 @@ $router->post('/checkout', function () {
 
     // Check if payment was made with Stripe
     if (isset($stripeCustomerToken)) {
-        $paymentMethod = 'credit_payment';
+        $paymentMethod = 'check_payment';
         $paymentNote = $stripeCustomerToken;
     }else{
-        $paymentMethod = 'check_payment';
+        $paymentMethod = 'credit_payment';
         $paymentNote = true;
     }
 

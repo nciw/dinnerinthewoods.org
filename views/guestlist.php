@@ -32,7 +32,7 @@
                         <option value="1" <?php if (true == $guest->childcare) { echo 'selected'; } ?>>Yes</option>
                     </select>
                 </div>
-                <div class="col-md-2 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="restrictions">Food restrictions?</label>
                     <select class="form-control" name="guests[<?=$i?>][restrictions]">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>

@@ -96,7 +96,7 @@ $router->post('/checkout', function () {
     $cabanaReservation = $_POST['cabanaReservation'] > 0 ? convertPossibleFloatToCents($_SERVER['CABANA_PRICE']) : 0;
 
     // Sum the cart totals
-    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + ($cabanaReservation * $_SERVER['CABANA_PRICE']);
+    $cartTotal = $eventTicketPrice + $tableTicketPrice + $ticketEnhancerPrice + $additionalContribution + $cabanaReservation;
 
     $redirectUuid = $uuid = \Ramsey\Uuid\Uuid::uuid1();
 

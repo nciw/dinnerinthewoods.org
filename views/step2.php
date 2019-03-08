@@ -22,7 +22,7 @@
             $eventTicketQty = getInteger($_POST['eventTicketQty']);
             $ticketEnhancerQty = getInteger($_POST['ticketEnhancerQty']);
             $additionalContribution = getInteger($_POST['additionalContribution']);
-            $cabanaReservation = getInteger($_POST['cabanaReservation']);
+            $cabanaReservation = ($_POST['cabanaReservation'] > 0) ? 1 : 0;
             ?>
             <input type="hidden" name="eventTicketQty" value="<?=$eventTicketQty?>" />
             <input type="hidden" name="ticketEnhancerQty" value="<?=$ticketEnhancerQty?>" />

@@ -26,6 +26,9 @@ $dotenv->required([
     'STRIPE_API_PUBLIC_KEY',
 ]);
 
+$_SERVER['receipt-url'] = $_SERVER['HTTP_HOST']."/thank-you/";
+$_SERVER['manage-url'] = $_SERVER['HTTP_HOST']."/manage/";
+
 $router = new Router();
 $r = R::setup('mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'], $_SERVER['DB_USER'], $_SERVER['DB_PASS']);
 
@@ -36,7 +39,7 @@ $router->set404(function () {
 });
 
 // Static route: / (homepage)
-$router->get('/', function(){
+$router->get('/', function () {
     $settings = \RedBeanPHP\R::load('settings', 1);
     $tickets = $settings->value;
 
@@ -49,7 +52,7 @@ $router->get('/', function(){
     include 'views/common/footer.php';
 });
 
-$router->get('/notify', function(){
+$router->get('/notify', function () {
     include 'views/common/head.php';
     include 'views/notify.php';
     include 'views/common/footer.php';
@@ -160,6 +163,60 @@ $router->post('/checkout', function () {
         unset($guest, $uuid);
     }
 
+    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
+
+    /**
+    $additionalContribution = convertPossibleFloatToCents($_POST['additionalContribution']);
+    list($tableTicketQty, $eventTicketQty) = eventPricing($eventTicketQty);
+    $eventTicketPrice = convertPossibleFloatToCents($eventTicketQty * $_SERVER['EVENT_TICKET_PRICE']);
+    $tableTicketPrice = convertPossibleFloatToCents($tableTicketQty * $_SERVER['TABLE_TICKET_PRICE']);
+    $ticketEnhancerPrice = convertPossibleFloatToCents($ticketEnhancerQty * $_SERVER['ENHANCER_TICKET_PRICE']);
+    $cabanaReservation = $_POST['cabanaReservation'] > 0 ? convertPossibleFloatToCents($_SERVER['CABANA_PRICE']) : 0;
+
+     */
+    $orderedItems = [];
+    if ($eventTicketQty > 0) {
+        array_push($orderedItems, ['description' => $eventTicketQty . ' x Dinner tickets', 'amount' => '$' . number_format(($eventTicketPrice / 100), 2)]);
+    }
+    if ($tableTicketQty > 0) {
+        array_push($orderedItems, ['description' => $eventTicketQty . ' x Table', 'amount' => '$' . number_format(($tableTicketPrice / 100), 2)]);
+    }
+    if ($ticketEnhancerQty > 0) {
+        array_push($orderedItems, ['description' => $ticketEnhancerQty . ' x Packs of ticket enhancers', 'amount' => '$' . number_format(($ticketEnhancerPrice / 100), 2)]);
+    }
+    if ($cabanaReservation > 0) {
+        array_push($orderedItems, ['description' => 'Cabana reservation', 'amount' => '$' . number_format(($cabanaReservation / 100), 2)]);
+    }
+    if ($additionalContribution > 0) {
+        array_push($orderedItems, ['description' => 'Additional contribution', 'amount' => '$' . number_format(($additionalContribution / 100), 2)]);
+    }
+
+    // Check if payment was made with Stripe
+    if (isset($stripeCustomerToken)) {
+        $paymentMethod = 'credit_payment';
+        $paymentNote = $stripeCustomerToken;
+    }else{
+        $paymentMethod = 'check_payment';
+        $paymentNote = true;
+    }
+
+    $client->sendEmailWithTemplate(
+        $_SERVER['POSTMARK_FROM'],
+        $order->email,
+        $_SERVER['POSTMARK_TEMPLATE'],
+        [
+            'name' => $order->first_name,
+            'product_name' => 'Dinner in the Woods ' . date('Y'),
+            'date' => date('m-d-Y'),
+            'receipt_id' => $order->id,
+            'receipt_details' => $orderedItems,
+            'total' => '$' . number_format(($order->total_cents / 100), 2),
+            'action_manage_guests_url' => '//'.$_SERVER['manage-url'] . $order->uuid,
+            'action_receipt_url' => '//'.$_SERVER['receipt-url'] . $order->uuid,
+            $paymentMethod => $paymentNote
+        ]
+    );
+
     header('Location: /thank-you/' . $redirectUuid->toString());
 });
 
@@ -209,7 +266,7 @@ $router->post('/manage/{uuid}', function ($uuid) {
         }
     }
 
-    header('Location: /manage/'. $uuid . '?alert=success');
+    header('Location: /manage/' . $uuid . '?alert=success');
 });
 
 // Run it!

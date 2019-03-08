@@ -179,7 +179,7 @@ $router->post('/checkout', function () {
         array_push($orderedItems, ['description' => $eventTicketQty . ' x Dinner tickets', 'amount' => '$' . number_format(($eventTicketPrice / 100), 2)]);
     }
     if ($tableTicketQty > 0) {
-        array_push($orderedItems, ['description' => $eventTicketQty . ' x Table', 'amount' => '$' . number_format(($tableTicketPrice / 100), 2)]);
+        array_push($orderedItems, ['description' => $tableTicketQty . ' x Table', 'amount' => '$' . number_format(($tableTicketPrice / 100), 2)]);
     }
     if ($ticketEnhancerQty > 0) {
         array_push($orderedItems, ['description' => $ticketEnhancerQty . ' x Packs of ticket enhancers', 'amount' => '$' . number_format(($ticketEnhancerPrice / 100), 2)]);

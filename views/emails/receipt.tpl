@@ -55,7 +55,7 @@
             -premailer-width: 100%;
             -premailer-cellpadding: 0;
             -premailer-cellspacing: 0;
-            background-color: #F2F4F6;
+            background-color: #fffffc;
         }
 
         .email-content {
@@ -80,7 +80,7 @@
         .email-masthead_name {
             font-size: 16px;
             font-weight: bold;
-            color: #bbbfc3;
+            color: #fff;
             text-decoration: none;
             text-shadow: 0 1px 0 white;
         }
@@ -392,7 +392,7 @@
     </style>
 </head>
 <body>
-<span class="preheader">This is a receipt for your recent purchase on {{ purchase_date }}. No payment is due with this receipt.</span>
+<span class="preheader">This is a receipt for {{ product_name }} on {{ purchase_date }}.</span>
 <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">
@@ -481,12 +481,12 @@
                                             </td>
                                         </tr>
                                     </table>
+                                    <p class="sub">Link not working? Copy and paste the URL {{action_manage_guests_url}}</p>
                                     <!-- Sub copy -->
                                     <table class="body-sub">
                                         <tr>
                                             <td>
                                                 <p class="sub">Need a printable copy for your records? You can <a href="{{action_receipt_url}}">view a copy</a> online or print this email.</p>
-                                                </p>
                                             </td>
                                         </tr>
                                     </table>

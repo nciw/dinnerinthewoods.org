@@ -1,0 +1,42 @@
+**************
+This is a receipt for {{ product_name }} on {{ purchase_date }}.
+**************
+
+Hi {{name}},
+
+Thanks for your purchase! This email is the receipt for your purchase.{{^ credit_payment}} No payment is due.{{/credit_payment}}
+
+{{^ check_payment}}
+ Mail or drop off payment within seven days or your tickets will be released for others to purchase
+
+  Mail to:
+  Attn: Dinner in the Woods
+  Nature's Classroom
+  PO Box 660
+  Mukwonago, WI 53149
+{{/check_payment}}
+
+**************
+Receipt #{{receipt_id}}
+Date Purchased {{date}}
+**************
+
+Items Purchased:
+----------------
+{{#each receipt_details}}
+{{description}} = {{amount}}
+{{/each}}
+----------------
+Total: {{total}}
+
+**************
+
+If you have any questions about this receipt, simply reply to this email for help.
+
+Gratefully,
+Nature’s Classroom Institute and Montessori School
+
+Manage your guests here: {{action_manage_guests_url}}
+
+Need a printable copy for your records? You can view a copy online at {{action_receipt_url}} or print this email.
+

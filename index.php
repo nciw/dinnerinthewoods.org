@@ -202,8 +202,8 @@ $router->post('/checkout', function () {
             'receipt_id' => $order->id,
             'receipt_details' => $orderedItems,
             'total' => '$' . number_format(($order->total_cents / 100), 2),
-            'action_manage_guests_url' => '//'.$_SERVER['manage-url'] . $order->uuid,
-            'action_receipt_url' => '//'.$_SERVER['receipt-url'] . $order->uuid,
+            'action_manage_guests_url' => 'https://'.$_SERVER['manage-url'] . $order->uuid,
+            'action_receipt_url' => 'https://'.$_SERVER['receipt-url'] . $order->uuid,
             $paymentMethod => $paymentNote
         ]
     );

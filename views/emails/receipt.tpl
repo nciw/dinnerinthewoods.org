@@ -55,7 +55,7 @@
             -premailer-width: 100%;
             -premailer-cellpadding: 0;
             -premailer-cellspacing: 0;
-            background-color: #fffffc;
+            background-color: #F2F4F6;
         }
 
         .email-content {

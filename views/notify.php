@@ -3,6 +3,12 @@
         <div class="mb-12 text-center">
             <br/><br/>
             <h3>Sorry - tickets are not on sale to the public yet.</h3>
+            <?php
+            if (isset($_GET['d'])) {
+                $date = new DateTime($_GET['d']);
+                echo '<h5>Tickets go on sale ' . $date->format('F jS, Y \a\t h:ia') . '</h5>';
+            }
+            ?>
             <!-- Begin Mailchimp Signup Form -->
             <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
             <style type="text/css">

@@ -47,6 +47,7 @@ $router->get('/', function () {
         header('Location: /sold-out');
     }
 
+    checkIfTicketsAreOnSale();
     include 'views/common/head.php';
     include 'views/family.php';
     include 'views/common/footer.php';
@@ -59,6 +60,7 @@ $router->get('/notify', function () {
 });
 
 $router->get('/step-1', function () {
+    checkIfTicketsAreOnSale();
     include 'views/common/head.php';
     include 'views/step1.php';
     include 'views/common/footer.php';

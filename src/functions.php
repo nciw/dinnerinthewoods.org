@@ -85,3 +85,14 @@ function shoppingCartTotal($price)
                 <strong>' . '$' . number_format(($price / 100), 2) . '</strong>
             </li>';
 }
+
+function checkIfTicketsAreOnSale() {
+    $todaysDate = new DateTime('now', new DateTimeZone('America/Chicago'));
+    $dateOnSale = new DateTime('3/15/2019 9:00am', new DateTimeZone('America/Chicago'));
+    $interval = $todaysDate->diff($dateOnSale);
+
+    if($interval->days >= 0 && $interval->invert === 0) {
+        header('Location: /notify?d='.$dateOnSale->format('c'));
+    }
+
+}

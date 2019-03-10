@@ -244,14 +244,11 @@ $router->post('/manage/{uuid}', function ($uuid) {
     $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?', $parametersToSearch);
 
     foreach ($guests as $id => $guest) {
-        if (!empty($_POST['guests'][$id]['name']) &&
-            !empty($_POST['guests'][$id]['email']) &&
-            !empty($_POST['guests'][$id]['phone'])) {
+        if (isset($_POST['guests'][$id]['name'])) {
             $guest->name = $_POST['guests'][$id]['name'];
             $guest->email = $_POST['guests'][$id]['email'];
             $guest->phone = $_POST['guests'][$id]['phone'];
             $guest->childcare = $_POST['guests'][$id]['childcare'];
-            $guest->valet = $_POST['guests'][$id]['valet'];
             $guest->restrictions = $_POST['guests'][$id]['restrictions'];
             R::store($guest);
         }

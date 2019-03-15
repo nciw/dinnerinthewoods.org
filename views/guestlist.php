@@ -18,7 +18,7 @@ if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
         ?>
         <input type="hidden" name="guests[<?=$guest->id?>][id]" value="<?=$guest->id;?>" >
         <input type="hidden" name="guestsArray[]" value="<?=$guest->id;?>" >
-        <h5 class="mb-3">Guest #<?=$i?> <small><?=(is_null($guest->table)) ? '' : 'Table #' . $guest->table; ?><?=(is_null($guest->paddle)) ? '' : ', Paddle #' . $guest->paddle; ?></small></h5>
+        <h5 class="mb-3">Guest #<?=$i?> <small><?=(empty($guest->table)) ? '' : 'Table #' . $guest->table; ?><?=(empty($guest->paddle)) ? '' : ', Paddle #' . $guest->paddle; ?></small></h5>
             <div class="row">
                 <div class="col-md-2 mb-3">
                     <label for="name">Full name</label>

@@ -55,7 +55,6 @@
             -premailer-width: 100%;
             -premailer-cellpadding: 0;
             -premailer-cellspacing: 0;
-            background-color: #F2F4F6;
         }
 
         .email-content {
@@ -409,57 +408,14 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <h1>Hi {{name}},</h1>
-                                    <p>Thanks for your purchase! This email is the receipt for your purchase.{{^ credit_payment}} No payment is due.{{/credit_payment}}</p>
-                                    {{^ check_payment}}<p>
-                                        Mail or drop off payment within seven days or your tickets will be released
-                                        for others to purchase<br/>
-                                        <br/>
-                                        Mail to:<br/>
-                                        Attn: Dinner in the Woods<br/>
-                                        Nature's Classroom<br/>
-                                        PO Box 660<br/>
-                                        Mukwonago, WI 53149
-                                    </p>
-                                    {{/check_payment}}
+                                    <h1>Hi {{guest_name}},</h1>
+                                    <p>You've been invited to Dinner in the Woods by {{from_name}}! This email confirms you as a guest and allows you to manage your profile to make for a more pleasant experience at the event.</p>
+                                    <p>Dinner in the Woods is on Saturday, June 1st, 2019 from 5:00pm to 11:30pm and is hosted at <a href="https://goo.gl/maps/LQPvQf9Ndh82">Natures Classroom Institute of Wisconsin</a>. We hope you'll enjoy the live music, local food, and live & silent auctions the day of the event!</p>
 
-                                    <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td>
-                                                <h3>Receipt #{{receipt_id}}</h3></td>
-                                            <td>
-                                                <h3 class="align-right">{{date}}</h3></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
-                                                    <tr>
-                                                        <th class="purchase_heading">
-                                                            <p>Description</p>
-                                                        </th>
-                                                        <th class="purchase_heading">
-                                                            <p class="align-right">Amount</p>
-                                                        </th>
-                                                    </tr>
-                                                    {{#each receipt_details}}
-                                                    <tr>
-                                                        <td width="80%" class="purchase_item">{{description}}</td>
-                                                        <td class="align-right purchase_item" width="20%">{{amount}}</td>
-                                                    </tr>
-                                                    {{/each}}
-                                                    <tr>
-                                                        <td width="80%" class="purchase_footer" valign="middle">
-                                                            <p class="purchase_total purchase_total--label">Total</p>
-                                                        </td>
-                                                        <td width="20%" class="purchase_footer" valign="middle">
-                                                            <p class="purchase_total">{{total}}</p>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <p>If you have any questions about this receipt, simply reply to this email for help.</p>
+                                    <p>As we get closer to the event we will send reminders and more details. </p>
+                                    <p></p><i>If you cannot attend please let your host know.</i> {{from_name}} invited you and their email is <a href="mailto:{{from_email}}">{{from_email}}</a></p>
+
+                                    <p>If you have any questions about the event or schol, simply reply to this email for help.</p>
                                     <p>Gratefully,
                                         <br>Nature’s Classroom Institute and Montessori School</p>
                                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
@@ -471,7 +427,7 @@
                                                             <table border="0" cellspacing="0" cellpadding="0">
                                                                 <tr>
                                                                     <td>
-                                                                        <a href="{{action_manage_guests_url}}" class="button button--blue" target="_blank">Manage Guests</a>
+                                                                        <a href="{{action_manage_guests_url}}" class="button button--blue" target="_blank">Manage Your Account</a>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -482,14 +438,7 @@
                                         </tr>
                                     </table>
                                     <p class="sub">Link not working? Copy and paste the URL {{action_manage_guests_url}}</p>
-                                    <!-- Sub copy -->
-                                    <table class="body-sub">
-                                        <tr>
-                                            <td>
-                                                <p class="sub">Need a printable copy for your records? You can <a href="{{action_receipt_url}}">view a copy</a> online or print this email.</p>
-                                            </td>
-                                        </tr>
-                                    </table>
+
                                 </td>
                             </tr>
                         </table>

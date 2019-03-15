@@ -26,12 +26,13 @@ $dotenv->required([
     'STRIPE_API_PUBLIC_KEY',
 ]);
 
-$_SERVER['receipt-url'] = $_SERVER['HTTP_HOST']."/thank-you/";
-$_SERVER['manage-url'] = $_SERVER['HTTP_HOST']."/manage/";
+$_SERVER['receipt-url'] = $_SERVER['HTTP_HOST'] . "/thank-you/";
+$_SERVER['manage-url'] = $_SERVER['HTTP_HOST'] . "/manage/";
+$_SERVER['manage-guest-url'] = $_SERVER['HTTP_HOST'] . "/guest/";
 
 $router = new Router();
 $r = R::setup('mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'], $_SERVER['DB_USER'], $_SERVER['DB_PASS']);
-
+R::freeze(true);
 // Custom 404 Handler
 $router->set404(function () {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
@@ -57,6 +58,39 @@ $router->get('/notify', function () {
     include 'views/common/head.php';
     include 'views/notify.php';
     include 'views/common/footer.php';
+});
+
+$router->get('/admin/orders', function () {
+    $orders = R::findAll('orders');
+
+    include 'views/common/head.php';
+    include 'views/admin.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/admin/order/{id}', function ($id) {
+    $order = R::load('orders', $id);
+    $guests = R::findAll('guests', ' order_id = ?', [$order->id]);
+
+    include 'views/common/head.php';
+    include 'views/admin-order-details.php';
+    include 'views/common/footer.php';
+});
+
+$router->post('/admin/order/{id}', function ($id) {
+    $order = R::load('orders', $id);
+    $parametersToSearch = $_POST['guestsArray'];
+    array_push($parametersToSearch, $order->id);
+    $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?', $parametersToSearch);
+
+    foreach ($guests as $id => $guest) {
+        $guest->table = (int)$_POST['table'][$id];
+        $guest->paddle = (int)$_POST['paddle'][$id];
+        R::store($guest);
+    }
+
+    header('Location: /admin/order/' . $order->id . '?alert=success');
+
 });
 
 $router->get('/step-1', function () {
@@ -165,7 +199,6 @@ $router->post('/checkout', function () {
         unset($guest, $uuid);
     }
 
-    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
 
     $orderedItems = [];
     if ($eventTicketQty > 0) {
@@ -188,11 +221,12 @@ $router->post('/checkout', function () {
     if (isset($stripeCustomerToken)) {
         $paymentMethod = 'check_payment';
         $paymentNote = $stripeCustomerToken;
-    }else{
+    } else {
         $paymentMethod = 'credit_payment';
         $paymentNote = true;
     }
 
+    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
     $client->sendEmailWithTemplate(
         $_SERVER['POSTMARK_FROM'],
         $order->email,
@@ -204,8 +238,8 @@ $router->post('/checkout', function () {
             'receipt_id' => $order->id,
             'receipt_details' => $orderedItems,
             'total' => '$' . number_format(($order->total_cents / 100), 2),
-            'action_manage_guests_url' => 'https://'.$_SERVER['manage-url'] . $order->uuid,
-            'action_receipt_url' => 'https://'.$_SERVER['receipt-url'] . $order->uuid,
+            'action_manage_guests_url' => 'https://' . $_SERVER['manage-url'] . $order->uuid,
+            'action_receipt_url' => 'https://' . $_SERVER['receipt-url'] . $order->uuid,
             $paymentMethod => $paymentNote
         ]
     );
@@ -219,6 +253,38 @@ $router->get('/manage/{uuid}', function ($uuid) {
     include 'views/common/head.php';
     include 'views/guestlist.php';
     include 'views/common/footer.php';
+});
+
+$router->get('/guest/{uuid}', function ($uuid) {
+    $guest = R::findOne('guests', ' uuid = ?', [$uuid]);
+    include 'views/common/head.php';
+    include 'views/guest-manage.php';
+    include 'views/common/footer.php';
+});
+
+$router->post('/guest/{uuid}', function ($uuid) {
+    if ($uuid !== $_POST['uuid']) {
+        throw new Exception('Invalid form submission', 400);
+    }
+    $guest = R::findOne('guests', ' uuid = ?', [$uuid]);
+
+    // Check if credit checkout and valid
+    if (isset($_POST['stripeToken'])) {
+        Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
+        $customer = Customer::create([
+            "description" => $guest->name . ' - ' . $guest->email,
+            "source" => $_POST['stripeToken'], // obtained with Stripe.js
+        ]);
+
+        // make payment
+        $guest->stripe_id = $customer->id;
+    }
+
+    $guest->phone = $_POST['phone'];
+    $guest->childcare = $_POST['childcare'];
+    $guest->restrictions = $_POST['restrictions'];
+    R::store($guest);
+    header('Location: /guest/' . $guest->uuid . '?alert=success');
 });
 
 $router->get('/thank-you/{uuid}', function ($uuid) {
@@ -244,15 +310,39 @@ $router->post('/manage/{uuid}', function ($uuid) {
     $parametersToSearch = $_POST['guestsArray'];
     array_push($parametersToSearch, $order->id);
     $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?', $parametersToSearch);
+    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
 
     foreach ($guests as $id => $guest) {
         if (isset($_POST['guests'][$id]['name'])) {
             $guest->name = $_POST['guests'][$id]['name'];
+            if ($guest->email !== $_POST['guests'][$id]['email'] && !empty($_POST['guests'][$id]['email'])) {
+                $guestUuid = \Ramsey\Uuid\Uuid::uuid1();
+                $emailGuestInfo = true;
+                $guest->stripe_id = ''; // Clear stripe id if email changes
+                $guest->uuid = $guestUuid->toString(); // get new UUID if email changes
+            } else {
+                $emailGuestInfo = false;
+            }
             $guest->email = $_POST['guests'][$id]['email'];
             $guest->phone = $_POST['guests'][$id]['phone'];
             $guest->childcare = $_POST['guests'][$id]['childcare'];
             $guest->restrictions = $_POST['guests'][$id]['restrictions'];
             R::store($guest);
+
+            if ($emailGuestInfo) {
+                $client->sendEmailWithTemplate(
+                    $_SERVER['POSTMARK_FROM'],
+                    $guest->email,
+                    $_SERVER['POSTMARK_GUEST_TEMPLATE'],
+                    [
+                        'from_name' => $order->first_name . ' ' . $order->last_name,
+                        'from_email' => $order->email,
+                        'guest_name' => $guest->name,
+                        'product_name' => 'Dinner in the Woods ' . date('Y'),
+                        'action_manage_guests_url' => 'https://' . $_SERVER['manage-guest-url'] . $guest->uuid,
+                    ]
+                );
+            }
         }
     }
 

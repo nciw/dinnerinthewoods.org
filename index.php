@@ -68,6 +68,21 @@ $router->get('/admin/orders', function () {
     include 'views/common/footer.php';
 });
 
+$router->get('/admin/guests/export', function () {
+    R::csv('SELECT * FROM guests',[], [
+        'id','order number', 'name', 'email', 'phone', 'childcare? (0=no, 1=yes)','valet? (0=no, 1=yes)','food restrictions? (0=no, 1=vegetarian, 2=vegan)','table','paddle','stripe_id','uuid','date created'
+    ], 'guests.csv', true);
+    exit;
+});
+
+$router->get('/admin/orders/export', function () {
+    R::csv('SELECT * FROM orders',[], [
+        'order number','ticket quantity','enhancer quantity','ticket cents', 'enhancer cents', 'additional cents', 'cabana cents', 'total cents', 'first name', 'last name', 'email',
+        'address','city','state','zip','payment type (0=credit, 1=check)','stripe token', 'date created', 'uuid'
+    ], 'orders.csv', true);
+    exit;
+});
+
 $router->get('/admin/order/{id}', function ($id) {
     $order = R::load('orders', $id);
     $guests = R::findAll('guests', ' order_id = ?', [$order->id]);

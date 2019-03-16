@@ -1,6 +1,8 @@
 <h1>Admin Login</h1>
 
 <div class="row">
+    <div class="col-md-12 order-md-1">
+
     <form method="POST">
         <div class="input-group form-group">
             <input type="text" name="username" class="form-control" placeholder="username">
@@ -14,4 +16,5 @@
     </form>
     <br/>
     <br/>
+    </div>
 </div>

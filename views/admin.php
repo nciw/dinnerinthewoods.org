@@ -44,7 +44,7 @@
                         ?>
                     </td>
                     <td>
-                        <a href="/admin/order/<?=$order->id?>" class="btn btn-primary" role="button">Order</a>
+                        <a href="/admin/order/<?=$order->id?>" class="btn btn-primary" role="button">View Order</a>
                     </td>
                 </tr>
             <?php } ?>

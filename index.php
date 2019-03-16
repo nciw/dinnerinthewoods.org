@@ -39,6 +39,31 @@ $router->set404(function () {
     echo '404, route not found!';
 });
 
+
+$router->before('GET|POST', '/admin/.*', function() {
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header('location: /auth/login');
+        exit();
+    }
+});
+
+$router->get('/auth/login', function() {
+    include 'views/common/head.php';
+    include 'views/admin-login.php';
+    include 'views/common/footer.php';
+});
+
+$router->post('/auth/login', function() {
+    if (($_POST['username'] == $_SERVER['ADMIN_USER']) && ($_POST['password'] == $_SERVER['ADMIN_PASS'])) {
+        session_start();
+        $_SESSION['user'] = $_POST['username'];
+        header('Location: /admin/orders');
+    }else{
+        header('Location: /auth/login?alert=error');
+    }
+});
+
 // Static route: / (homepage)
 $router->get('/', function () {
     $settings = \RedBeanPHP\R::load('settings', 1);

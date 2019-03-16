@@ -147,13 +147,15 @@ $router->post('/checkout', function () {
     if ($_POST['paymentMethod'] == 0) {
         Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
         $customer = Customer::create([
-            "description" => $_POST['firstName'] . ' ' . $_POST['lastName'] . ' - ' . $_POST['email'],
-            "source" => $_POST['stripeToken'], // obtained with Stripe.js
+            'description' => $_POST['firstName'] . ' ' . $_POST['lastName'] . ' - ' . $_POST['email'],
+            'source' => $_POST['stripeToken'], // obtained with Stripe.js
+            'email' => $_POST['email'],
         ]);
         // Charge the Customer instead of the card:
         $charge = Charge::create([
             'amount' => $cartTotal,
             'currency' => 'usd',
+            'description' => date('Y') . ' Dinner in the Woods',
             'customer' => $customer->id,
         ]);
         // make payment

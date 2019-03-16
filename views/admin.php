@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12 order-md-1">
-        <h3 class="mb-3">Orders <a href="/admin/order/export" class="btn btn-primary">Export</a></h3>
+        <h3 class="mb-3">Orders <a href="/admin/orders/export" class="btn btn-primary">Order Export</a><a href="/admin/guests/export" class="btn btn-primary">Guest Export</a></h3>
         <table class="table table-striped">
             <thead>
             <tr>

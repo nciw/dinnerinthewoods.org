@@ -22,6 +22,47 @@ function getInteger($variable, $postiveOnly = true)
 }
 
 /**
+ * Calculate Event Pricing based on date
+ *
+ * @param DateTime $date
+ * @return array
+ * @throws Exception
+ */
+function getEventPricing($date = null)
+{
+    $priceIncrease1 = new DateTime('4/1/2019', new DateTimeZone('America/Chicago'));
+    $priceIncrease2 = new DateTime('5/1/2019', new DateTimeZone('America/Chicago'));
+
+    if (empty($date)) {
+        return [
+            $_SERVER['EVENT_TICKET_PRICE_1'],
+            $_SERVER['TABLE_TICKET_PRICE_1'],
+        ];
+    }
+
+    $interval = $date->diff($priceIncrease1);
+    if ($interval->invert !== 0) {
+        return [
+            $_SERVER['EVENT_TICKET_PRICE_2'],
+            $_SERVER['TABLE_TICKET_PRICE_2'],
+        ];
+    }
+
+    $interval = $date->diff($priceIncrease2);
+    if ($interval->invert !== 0) {
+        return [
+            $_SERVER['EVENT_TICKET_PRICE_3'],
+            $_SERVER['TABLE_TICKET_PRICE_3'],
+        ];
+    }else {
+        return [
+            $_SERVER['EVENT_TICKET_PRICE_1'],
+            $_SERVER['TABLE_TICKET_PRICE_1'],
+        ];
+    }
+}
+
+/**
  * Converts possible float or string to cents
  *
  * @param $variable
@@ -69,9 +110,9 @@ function eventPricing($qty)
 
     // If pricing is 8 or more then we need to factor in table reservations
     if ($qty > 7) {
-        $tableQty = (int) ($qty / 8);
+        $tableQty = (int)($qty / 8);
         $eventQty = $qty - ($tableQty * 8);
-    }else {
+    } else {
         $eventQty = $qty;
     }
 
@@ -86,13 +127,14 @@ function shoppingCartTotal($price)
             </li>';
 }
 
-function checkIfTicketsAreOnSale() {
+function checkIfTicketsAreOnSale()
+{
     $todaysDate = new DateTime('now', new DateTimeZone('America/Chicago'));
     $dateOnSale = new DateTime('3/15/2019 8:00am', new DateTimeZone('America/Chicago'));
     $interval = $todaysDate->diff($dateOnSale);
 
-    if($interval->days >= 0 && $interval->invert === 0) {
-        header('Location: /notify?d='.$dateOnSale->format('c'));
+    if ($interval->days >= 0 && $interval->invert === 0) {
+        header('Location: /notify?d=' . $dateOnSale->format('c'));
     }
 
 }

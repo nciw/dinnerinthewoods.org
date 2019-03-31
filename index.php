@@ -13,7 +13,9 @@ require __DIR__ . '/src/functions.php';
 $dotenv = \Dotenv\Dotenv::create(__DIR__ . '/src');
 $dotenv->load();
 $dotenv->required([
-    'EVENT_TICKET_PRICE',
+    'EVENT_TICKET_PRICE_1',
+    'EVENT_TICKET_PRICE_2',
+    'EVENT_TICKET_PRICE_3',
     'ENHANCER_TICKET_PRICE',
     'CHILDCARE_PRICE',
     'CABANA_PRICE',
@@ -38,6 +40,9 @@ $router->set404(function () {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     echo '404, route not found!';
 });
+
+// Get event pricing based on dates
+list($_SERVER['EVENT_TICKET_PRICE'], $_SERVER['TABLE_TICKET_PRICE']) = getEventPricing(new DateTime('now', new DateTimeZone('America/Chicago')));
 
 
 $router->before('GET|POST', '/admin/.*', function() {

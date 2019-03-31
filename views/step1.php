@@ -1,7 +1,14 @@
+<?php
+$aprilIncrease = new DateTime('4/1/2019', new DateTimeZone('America/Chicago'));
+$now = new DateTime('now', new DateTimeZone('America/Chicago'));
+
+$interval = $now->diff($aprilIncrease);
+if ($interval->invert == 0) { ?>
 <div class="alert alert-warning" role="alert">
     Pricing increases on April 1st! Buy tickets now!
 </div>
 <?php
+}
 $settings = \RedBeanPHP\R::load('settings', 1);
 $tickets = $settings->value;
 if ($tickets <= 25) { ?>

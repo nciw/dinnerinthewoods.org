@@ -295,7 +295,13 @@ $router->post('/checkout', function () {
             'action_manage_guests_url' => 'https://' . $_SERVER['manage-url'] . $order->uuid,
             'action_receipt_url' => 'https://' . $_SERVER['receipt-url'] . $order->uuid,
             $paymentMethod => $paymentNote
-        ]
+        ],
+        true, //inline css
+        null, //tag
+        true, //track opens
+        null, //reply to
+        null, //cc
+        $_SERVER['POSTMARK_FROM'] //bcc
     );
 
     header('Location: /thank-you/' . $redirectUuid->toString());

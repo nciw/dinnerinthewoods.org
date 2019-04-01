@@ -152,7 +152,8 @@ $router->post('/', function () {
 
     $settings = \RedBeanPHP\R::load('settings', 1);
     $tickets = $settings->value;
-    if (($eventTicketQty - $tickets) < 0) {
+
+    if (((int) $tickets - $eventTicketQty) < 0) {
         header('Location: /step-1?error=tickets');
     }
 

@@ -18,7 +18,7 @@ if ($tickets <= 50) { ?>
 <?php }
 
 if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-danger" role="alert">
         Sorry. There are only <?=$tickets?> remaining. Please select an amount less than or equal to the tickets remaining.
     </div>
     <?php

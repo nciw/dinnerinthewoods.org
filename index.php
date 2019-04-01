@@ -150,6 +150,12 @@ $router->post('/', function () {
     $eventTicketQty = getInteger($_POST['eventTicketQty']);
     $ticketEnhancerQty = getInteger($_POST['ticketEnhancerQty']);
 
+    $settings = \RedBeanPHP\R::load('settings', 1);
+    $tickets = $settings->value;
+    if (($eventTicketQty - $tickets) < 0) {
+        header('Location: /step-1?error=tickets');
+    }
+
     // Calculate totals
     $additionalContribution = convertPossibleFloatToCents($_POST['additionalContribution']);
     $cabanaReservation = convertPossibleFloatToCents($_POST['cabanaReservation']);

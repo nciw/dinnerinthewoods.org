@@ -11,7 +11,7 @@ if ($interval->invert == 0) { ?>
 }
 $settings = \RedBeanPHP\R::load('settings', 1);
 $tickets = $settings->value;
-if ($tickets <= 25) { ?>
+if ($tickets <= 50) { ?>
     <div class="alert alert-danger" role="alert">
         <strong>Hurry!</strong> Only <?=$tickets?> tickets remaining!
     </div>

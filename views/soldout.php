@@ -22,7 +22,6 @@
             <div id="mc_embed_signup">
                 <form action="https://discovernci.us9.list-manage.com/subscribe/post?u=191d352658045bb98e2c71587&amp;id=b56299d652" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                     <div id="mc_embed_signup_scroll">
-                        <h2>Sign up to be notified when tickets are available to the public!</h2>
                         <div class="mc-field-group">
                             <label for="mce-EMAIL">Email Address </label>
                             <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">

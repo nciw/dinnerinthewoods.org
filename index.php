@@ -347,6 +347,12 @@ $router->post('/guest/{uuid}', function ($uuid) {
     header('Location: /guest/' . $guest->uuid . '?alert=success');
 });
 
+$router->get('/gallery', function(){
+    include 'views/common/head.php';
+    include 'views/gallery.php';
+    include 'views/common/footer.php';
+});
+
 $router->get('/thank-you/{uuid}', function ($uuid) {
     $order = R::findOne('orders', ' uuid = ?', [$uuid]);
     $guests = R::findAll('guests', ' order_id = ?', [$order->id]);

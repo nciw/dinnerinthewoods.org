@@ -18,6 +18,18 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css">
 
+    <?php if ($_SERVER['REQUEST_URI'] == '/gallery') { ?>
+    <!-- Core CSS file -->
+    <link rel="stylesheet" href="/css/photoswipe.css">
+
+    <!-- Skin CSS file (styling of UI - buttons, caption, etc.) -->
+    <link rel="stylesheet" href="/css/photoswipe-skin/default-skin.css">
+    <!-- Core JS file -->
+    <script src="/js/photoswipe.js"></script>
+    <!-- UI JS file -->
+    <script src="/js/photoswipe-ui-default.js"></script>
+    <?php } ?>
+
     <!-- Linked Data for the event -->
     <script type="application/ld+json">
     {

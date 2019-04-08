@@ -353,6 +353,12 @@ $router->get('/gallery', function(){
     include 'views/common/footer.php';
 });
 
+$router->get('/parents', function(){
+    include 'views/common/head.php';
+    include 'views/parents.php';
+    include 'views/common/footer.php';
+});
+
 $router->get('/thank-you/{uuid}', function ($uuid) {
     $order = R::findOne('orders', ' uuid = ?', [$uuid]);
     $guests = R::findAll('guests', ' order_id = ?', [$order->id]);

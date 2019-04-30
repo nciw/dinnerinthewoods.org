@@ -63,7 +63,13 @@
                 <a class="nav-link" href="/gallery">Gallery</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/faqs">FAQs</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="https://discovernci.org">Learn more about Nature's Classroom</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="/step-1">Purchase Tickets</a>
             </li>
         </ul>
     </div>

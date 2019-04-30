@@ -71,13 +71,6 @@ $router->post('/auth/login', function() {
 
 // Static route: / (homepage)
 $router->get('/', function () {
-    $settings = \RedBeanPHP\R::load('settings', 1);
-    $tickets = $settings->value;
-
-    if ($tickets <= 0) {
-        header('Location: /sold-out');
-    }
-
     checkIfTicketsAreOnSale();
     include 'views/common/head.php';
     include 'views/family.php';
@@ -139,6 +132,13 @@ $router->post('/admin/order/{id}', function ($id) {
 });
 
 $router->get('/step-1', function () {
+    $settings = \RedBeanPHP\R::load('settings', 1);
+    $tickets = $settings->value;
+
+    if ($tickets <= 0) {
+        header('Location: /sold-out');
+    }
+
     checkIfTicketsAreOnSale();
     include 'views/common/head.php';
     include 'views/step1.php';
@@ -350,6 +350,13 @@ $router->post('/guest/{uuid}', function ($uuid) {
 $router->get('/gallery', function(){
     include 'views/common/head.php';
     include 'views/gallery.php';
+    include 'views/common/footer.php';
+});
+
+
+$router->get('/faqs', function(){
+    include 'views/common/head.php';
+    include 'views/faqs.php';
     include 'views/common/footer.php';
 });
 

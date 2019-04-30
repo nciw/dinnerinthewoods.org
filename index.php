@@ -45,7 +45,7 @@ $router->set404(function () {
 list($_SERVER['EVENT_TICKET_PRICE'], $_SERVER['TABLE_TICKET_PRICE']) = getEventPricing(new DateTime('now', new DateTimeZone('America/Chicago')));
 
 
-$router->before('GET|POST', '/admin/.*', function() {
+$router->before('GET|POST', '/admin/.*', function () {
     session_start();
     if (!isset($_SESSION['user'])) {
         header('location: /auth/login');
@@ -53,18 +53,18 @@ $router->before('GET|POST', '/admin/.*', function() {
     }
 });
 
-$router->get('/auth/login', function() {
+$router->get('/auth/login', function () {
     include 'views/common/head.php';
     include 'views/admin-login.php';
     include 'views/common/footer.php';
 });
 
-$router->post('/auth/login', function() {
+$router->post('/auth/login', function () {
     if (($_POST['username'] == $_SERVER['ADMIN_USER']) && ($_POST['password'] == $_SERVER['ADMIN_PASS'])) {
         session_start();
         $_SESSION['user'] = $_POST['username'];
         header('Location: /admin/orders');
-    }else{
+    } else {
         header('Location: /auth/login?alert=error');
     }
 });
@@ -92,16 +92,16 @@ $router->get('/admin/orders', function () {
 });
 
 $router->get('/admin/guests/export', function () {
-    R::csv('SELECT * FROM guests',[], [
-        'id','order number', 'name', 'email', 'phone', 'childcare? (0=no, 1=yes)','valet? (0=no, 1=yes)','food restrictions? (0=no, 1=vegetarian, 2=vegan)','table','paddle','stripe_id','uuid','date created'
+    R::csv('SELECT * FROM guests', [], [
+        'id', 'order number', 'name', 'email', 'phone', 'childcare? (0=no, 1=yes)', 'valet? (0=no, 1=yes)', 'food restrictions? (0=no, 1=vegetarian, 2=vegan)', 'table', 'paddle', 'stripe_id', 'uuid', 'date created'
     ], 'guests.csv', true);
     exit;
 });
 
 $router->get('/admin/orders/export', function () {
-    R::csv('SELECT * FROM orders',[], [
-        'order number','ticket quantity','enhancer quantity','ticket cents', 'enhancer cents', 'additional cents', 'cabana cents', 'total cents', 'first name', 'last name', 'email',
-        'address','city','state','zip','payment type (0=credit, 1=check)','stripe token', 'date created', 'uuid'
+    R::csv('SELECT * FROM orders', [], [
+        'order number', 'ticket quantity', 'enhancer quantity', 'ticket cents', 'enhancer cents', 'additional cents', 'cabana cents', 'total cents', 'first name', 'last name', 'email',
+        'address', 'city', 'state', 'zip', 'payment type (0=credit, 1=check)', 'stripe token', 'date created', 'uuid'
     ], 'orders.csv', true);
     exit;
 });
@@ -153,7 +153,7 @@ $router->post('/', function () {
     $settings = \RedBeanPHP\R::load('settings', 1);
     $tickets = $settings->value;
 
-    if (((int) $tickets - $eventTicketQty) < 0) {
+    if (((int)$tickets - $eventTicketQty) < 0) {
         header('Location: /step-1?error=tickets');
     }
 
@@ -315,6 +315,12 @@ $router->get('/manage/{uuid}', function ($uuid) {
     include 'views/common/footer.php';
 });
 
+$router->get('/blog/{title}', function ($title) {
+    include 'views/common/head.php';
+    include 'views/blog/' . $title . '.php';
+    include 'views/common/footer.php';
+});
+
 $router->get('/guest/{uuid}', function ($uuid) {
     $guest = R::findOne('guests', ' uuid = ?', [$uuid]);
     include 'views/common/head.php';
@@ -347,20 +353,20 @@ $router->post('/guest/{uuid}', function ($uuid) {
     header('Location: /guest/' . $guest->uuid . '?alert=success');
 });
 
-$router->get('/gallery', function(){
+$router->get('/gallery', function () {
     include 'views/common/head.php';
     include 'views/gallery.php';
     include 'views/common/footer.php';
 });
 
 
-$router->get('/faqs', function(){
+$router->get('/faqs', function () {
     include 'views/common/head.php';
     include 'views/faqs.php';
     include 'views/common/footer.php';
 });
 
-$router->get('/parents', function(){
+$router->get('/parents', function () {
     include 'views/common/head.php';
     include 'views/parents.php';
     include 'views/common/footer.php';

@@ -315,9 +315,9 @@ $router->get('/manage/{uuid}', function ($uuid) {
     include 'views/common/footer.php';
 });
 
-$router->get('/blog/{title}', function ($title) {
+$router->get('/blog', function () {
     include 'views/common/head.php';
-    include 'views/blog/' . $title . '.php';
+    include 'views/blog.php';
     include 'views/common/footer.php';
 });
 

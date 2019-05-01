@@ -115,6 +115,33 @@ $router->get('/admin/order/{id}', function ($id) {
     include 'views/common/footer.php';
 });
 
+$router->get('/admin/reminder-email', function () {
+    $orders = R::findAll('orders');
+    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
+
+    foreach ($orders as $order) {
+        $client->sendEmailWithTemplate(
+            $_SERVER['POSTMARK_FROM'],
+            $order->email,
+            $_SERVER['POSTMARK_REMINDER_TEMPLATE'],
+            [
+                'name' => $order->first_name,
+                'product_name' => 'Dinner in the Woods ' . date('Y'),
+                'action_manage_guests_url' => 'https://' . $_SERVER['manage-url'] . $order->uuid,
+            ],
+            true, //inline css
+            null, //tag
+            true, //track opens
+            null, //reply to
+            null //cc
+        );
+    }
+
+    include 'views/common/head.php';
+    include 'views/admin-order-details.php';
+    include 'views/common/footer.php';
+});
+
 $router->post('/admin/order/{id}', function ($id) {
     $order = R::load('orders', $id);
     $parametersToSearch = $_POST['guestsArray'];

@@ -60,7 +60,7 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/assets/dinner-in-the-woods-is-only-5-weeks-away.pdf">Updates</a>
+                <a class="nav-link" href="/assets/update.pdf">Updates</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/gallery">Gallery</a>

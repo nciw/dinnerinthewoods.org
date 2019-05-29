@@ -10,32 +10,32 @@
 </footer>
 </div>
 
+    <script type="application/javascript">
+        $('#enhancerModal').on('shown.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('name')
+            var guestid = button.data('guestid')
+            var modal = $(this)
+            modal.find('.modal-title').text('Add Enhancers for ' + recipient)
+            modal.find('.modal-body #inputGuestId').val(guestid)
+            modal.find('.modal-body #inputEnhancers').val('').focus()
+        });
 
-<script src="/js/main.js"></script>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
+        $("#checkout-body").on('input', '.txtCal', function () {
+            var calculated_total_sum = 0;
 
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
+            $("#checkout-body .txtCal").each(function () {
+                var get_textbox_value = $(this).val();
+                if ($.isNumeric(get_textbox_value)) {
+                    calculated_total_sum += parseFloat(get_textbox_value);
+                }
             });
-        }, false);
-    })();
-</script>
-<script type="application/javascript">
-    <?php include 'stripe.php'; ?>
-</script>
+
+            $('#totalCharge').val(calculated_total_sum)
+        });
+    </script>
+    <script type="application/javascript">
+        <?php include 'stripe.php'; ?>
+    </script>
 </body>
 </html>

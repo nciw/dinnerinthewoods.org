@@ -33,7 +33,8 @@ $_SERVER['manage-url'] = $_SERVER['HTTP_HOST'] . "/manage/";
 $_SERVER['manage-guest-url'] = $_SERVER['HTTP_HOST'] . "/guest/";
 
 $router = new Router();
-$r = R::setup('mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'], $_SERVER['DB_USER'], $_SERVER['DB_PASS']);
+$r = R::setup('mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'], $_SERVER['DB_USER'],
+    $_SERVER['DB_PASS']);
 R::freeze(true);
 // Custom 404 Handler
 $router->set404(function () {
@@ -42,7 +43,8 @@ $router->set404(function () {
 });
 
 // Get event pricing based on dates
-list($_SERVER['EVENT_TICKET_PRICE'], $_SERVER['TABLE_TICKET_PRICE']) = getEventPricing(new DateTime('now', new DateTimeZone('America/Chicago')));
+list($_SERVER['EVENT_TICKET_PRICE'], $_SERVER['TABLE_TICKET_PRICE']) = getEventPricing(new DateTime('now',
+    new DateTimeZone('America/Chicago')));
 
 
 $router->before('GET|POST', '/admin/.*', function () {
@@ -93,17 +95,113 @@ $router->get('/admin/orders', function () {
 
 $router->get('/admin/guests/export', function () {
     R::csv('SELECT * FROM guests', [], [
-        'id', 'order number', 'name', 'email', 'phone', 'childcare? (0=no, 1=yes)', 'valet? (0=no, 1=yes)', 'food restrictions? (0=no, 1=vegetarian, 2=vegan)', 'table', 'paddle', 'stripe_id', 'uuid', 'date created'
+        'id',
+        'order number',
+        'name',
+        'email',
+        'phone',
+        'childcare? (0=no, 1=yes)',
+        'valet? (0=no, 1=yes)',
+        'food restrictions? (0=no, 1=vegetarian, 2=vegan)',
+        'table',
+        'paddle',
+        'stripe_id',
+        'uuid',
+        'date created'
     ], 'guests.csv', true);
     exit;
 });
 
 $router->get('/admin/orders/export', function () {
     R::csv('SELECT * FROM orders', [], [
-        'order number', 'ticket quantity', 'enhancer quantity', 'ticket cents', 'enhancer cents', 'additional cents', 'cabana cents', 'total cents', 'first name', 'last name', 'email',
-        'address', 'city', 'state', 'zip', 'payment type (0=credit, 1=check)', 'stripe token', 'date created', 'uuid'
+        'order number',
+        'ticket quantity',
+        'enhancer quantity',
+        'ticket cents',
+        'enhancer cents',
+        'additional cents',
+        'cabana cents',
+        'total cents',
+        'first name',
+        'last name',
+        'email',
+        'address',
+        'city',
+        'state',
+        'zip',
+        'payment type (0=credit, 1=check)',
+        'stripe token',
+        'date created',
+        'uuid'
     ], 'orders.csv', true);
     exit;
+});
+
+$router->get('/admin/guest/list', function () {
+    $guests = R::findAll('guests', ' order by name asc ');
+
+    include 'views/common/head.php';
+    include 'views/admin-guest-list.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/admin/guest/add-card/{id}', function ($id) {
+    $guest = R::load('guests', $id);
+
+    include 'views/common/head.php';
+    include 'views/admin-guest-add-card.php';
+    include 'views/common/footer.php';
+});
+
+$router->get('/admin/guest/delete-card/{id}', function ($id) {
+    $guest = R::load('guests', $id);
+
+    Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
+    /** @var \Stripe\Customer $customer */
+    $customer = Customer::retrieve($guest->stripe_id);
+    $customer->delete();
+
+    $guest->stripe_id = null;
+    R::store($guest);
+
+    header('Location: /admin/guest/list?alert=success&msg=Credit card deleted '.$guest->name);
+
+});
+
+$router->get('/admin/guest/checkout/{id}', function ($id) {
+    $guest = R::load('guests', $id);
+
+    include 'views/common/head.php';
+    include 'views/admin-guest-checkout.php';
+    include 'views/common/footer.php';
+});
+
+$router->post('/admin/guest/add-card/{id}', function ($id) {
+    $guest = R::load('guests', $_POST['guestId']);
+    $guest->name = $_POST['name'];
+    $guest->email = $_POST['email'];
+
+    Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
+    $customer = Customer::create([
+        'description' => $_POST['name'] . ' - ' . $_POST['email'],
+        'source' => $_POST['stripeToken'], // obtained with Stripe.js
+        'email' => $_POST['email'],
+    ]);
+    $guest->stripe_id = $customer->id;
+    R::store($guest);
+
+    header('Location: /admin/guest/list?alert=success&msg=Added credit card for '.$guest->name);
+});
+
+$router->post('/admin/guest/list', function () {
+    $ticketEnhancerQty = getInteger($_POST['enhancerQty']);
+    $guestId = getInteger($_POST['guestId']);
+
+    $guest = R::load('guests', $guestId);
+    $guest->enhancer_qty = $guest->enhancer_qty + $ticketEnhancerQty;
+    R::store($guest);
+
+    header('Location: /admin/guest/list?alert=success&msg=Added '. $ticketEnhancerQty . ' for ' . $guest->name);
 });
 
 $router->get('/admin/order/{id}', function ($id) {
@@ -146,7 +244,8 @@ $router->post('/admin/order/{id}', function ($id) {
     $order = R::load('orders', $id);
     $parametersToSearch = $_POST['guestsArray'];
     array_push($parametersToSearch, $order->id);
-    $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?', $parametersToSearch);
+    $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?',
+        $parametersToSearch);
 
     foreach ($guests as $id => $guest) {
         $guest->table = (int)$_POST['table'][$id];
@@ -283,19 +382,32 @@ $router->post('/checkout', function () {
 
     $orderedItems = [];
     if ($eventTicketQty > 0) {
-        array_push($orderedItems, ['description' => $eventTicketQty . ' x Dinner tickets', 'amount' => '$' . number_format(($eventTicketPrice / 100), 2)]);
+        array_push($orderedItems, [
+            'description' => $eventTicketQty . ' x Dinner tickets',
+            'amount' => '$' . number_format(($eventTicketPrice / 100), 2)
+        ]);
     }
     if ($tableTicketQty > 0) {
-        array_push($orderedItems, ['description' => $tableTicketQty . ' x Table', 'amount' => '$' . number_format(($tableTicketPrice / 100), 2)]);
+        array_push($orderedItems, [
+            'description' => $tableTicketQty . ' x Table',
+            'amount' => '$' . number_format(($tableTicketPrice / 100), 2)
+        ]);
     }
     if ($ticketEnhancerQty > 0) {
-        array_push($orderedItems, ['description' => $ticketEnhancerQty . ' x Packs of ticket enhancers', 'amount' => '$' . number_format(($ticketEnhancerPrice / 100), 2)]);
+        array_push($orderedItems, [
+            'description' => $ticketEnhancerQty . ' x Packs of ticket enhancers',
+            'amount' => '$' . number_format(($ticketEnhancerPrice / 100), 2)
+        ]);
     }
     if ($cabanaReservation > 0) {
-        array_push($orderedItems, ['description' => 'Cabana reservation', 'amount' => '$' . number_format(($cabanaReservation / 100), 2)]);
+        array_push($orderedItems,
+            ['description' => 'Cabana reservation', 'amount' => '$' . number_format(($cabanaReservation / 100), 2)]);
     }
     if ($additionalContribution > 0) {
-        array_push($orderedItems, ['description' => 'Additional contribution', 'amount' => '$' . number_format(($additionalContribution / 100), 2)]);
+        array_push($orderedItems, [
+            'description' => 'Additional contribution',
+            'amount' => '$' . number_format(($additionalContribution / 100), 2)
+        ]);
     }
 
     // Check if payment was made with Stripe
@@ -421,7 +533,8 @@ $router->post('/manage/{uuid}', function ($uuid) {
     $order = R::findOne('orders', ' uuid = ?', [$uuid]);
     $parametersToSearch = $_POST['guestsArray'];
     array_push($parametersToSearch, $order->id);
-    $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?', $parametersToSearch);
+    $guests = R::findAll('guests', ' id IN(' . R::genSlots($_POST['guestsArray']) . ') AND order_id = ?',
+        $parametersToSearch);
     $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
 
     foreach ($guests as $id => $guest) {

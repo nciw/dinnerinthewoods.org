@@ -36,7 +36,7 @@
         "name": "Nature's Classroom Institute of Wisconsin"
       },
       "name": "Dinner in the Woods",
-      "startDate": "2019-06-01T17:30-06:00",
+      "startDate": "2019-06-01T16:00-06:00",
       "endDate": "2019-06-02T00:00-06:00",
       "description": "Annual Dinner in the Woods at Nature's classroom. Live Music. Local Food. Live & Silent Auctions"
     }

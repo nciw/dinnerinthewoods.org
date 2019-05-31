@@ -1,6 +1,7 @@
 <?php
 
 use Bramus\Router\Router;
+use Postmark\PostmarkClient;
 use RedBeanPHP\R;
 use Stripe\Charge;
 use Stripe\Customer;
@@ -174,6 +175,89 @@ $router->get('/admin/guest/checkout/{id}', function ($id) {
     include 'views/common/head.php';
     include 'views/admin-guest-checkout.php';
     include 'views/common/footer.php';
+});
+
+$router->post('/admin/guest/checkout/{id}', function ($id) {
+    $guest = R::load('guests', $id);
+    $totalChargeCents = convertPossibleFloatToCents($_POST['totalCharge']);
+    $guest->checkout_cents = $totalChargeCents;
+    Stripe::setApiKey($_SERVER['STRIPE_API_SECRET_KEY']);
+
+    if (isset($_POST['sendViaStripe']) && $_POST['sendViaStripe'] == 'on') {
+        if (empty($guest->stripe_id)) {
+            $customer = Customer::create([
+                'description' => $guest->name . ' - ' . $guest->email,
+                'email' => $guest->email,
+            ]);
+        } else {
+            $customer = $guest->stripe_id;
+        }
+
+        $invoiceItem = \Stripe\InvoiceItem::create([
+            'customer' => $customer,
+            'amount' => $guest->checkout_cents,
+            'currency' => 'usd',
+            'description' => 'Dinner in the Woods ' . date('Y'),
+        ]);
+
+        /** @var $invoice \Stripe\Invoice*/
+        $invoice = \Stripe\Invoice::create([
+            'customer' => $customer,
+            'billing' => 'send_invoice',
+            'days_until_due' => 1,
+            'description' => 'Dinner in the Woods ' . date('Y'),
+        ]);
+        $invoice->finalizeInvoice();
+
+        $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
+        $client->sendEmailWithTemplate(
+            $_SERVER['POSTMARK_FROM'],
+            $guest->email,
+            $_SERVER['POSTMARK_TEMPLATE_STRIPE_INVOICE'],
+            [
+                'name' => $guest->name,
+                'product_name' => 'Dinner in the Woods ' . date('Y'),
+                'action_receipt_url' => $invoice->hosted_invoice_url,
+            ],
+            true, //inline css
+            null, //tag
+            true, //track opens
+            null, //reply to
+            null //cc
+        );
+
+        R::store($guest);
+        header('Location: /admin/guest/list/?action=success&msg=Invoice created for ' . $guest->name);
+    } else {
+        if (!empty($guest->stripe_id)) {
+            $charge = \Stripe\Charge::create([
+                'amount' => $guest->checkout_cents,
+                'currency' => 'usd',
+                'customer' => $guest->stripe_id,
+            ]);
+        }
+
+        $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
+        $client->sendEmailWithTemplate(
+            $_SERVER['POSTMARK_FROM'],
+            $guest->email,
+            $_SERVER['POSTMARK_TEMPLATE_STRIPE_RECEIPT'],
+            [
+                'name' => $guest->name,
+                'total' => $guest->checkout_cents/100,
+                'product_name' => 'Dinner in the Woods ' . date('Y'),
+            ],
+            true, //inline css
+            null, //tag
+            true, //track opens
+            null, //reply to
+            null //cc
+        );
+
+        header('Location: /admin/guest/list/?action=success&msg=Charge created for ' . $guest->name);
+
+    }
+
 });
 
 $router->post('/admin/guest/add-card/{id}', function ($id) {

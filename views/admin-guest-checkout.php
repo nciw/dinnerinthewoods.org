@@ -30,7 +30,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">$</div>
                         </div>
-                        <input name="enhancerCharge" type="text" class="form-control txtCal" id="inlineFormInputGroup" value="<?=$guest->enhancer_qty * $_SERVER['ENHANCER_TICKET_PRICE']?>">
+                        <input name="enhancerCharge" type="text" class="form-control txtCal" id="inlineFormInputGroup" value="<?=$guest->enhancer_qty * $_SERVER['ENHANCER_TICKET_PRICE_SINGLE']?>">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -48,9 +48,16 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">$</div>
                         </div>
-                        <input name="totalCharge" type="text" class="form-control" id="totalCharge" value="<?=$guest->enhancer_qty * $_SERVER['ENHANCER_TICKET_PRICE']?>" readonly>
+                        <input name="totalCharge" type="text" class="form-control" id="totalCharge" value="<?=$guest->enhancer_qty * $_SERVER['ENHANCER_TICKET_PRICE_SINGLE']?>" readonly>
                     </div>
                 </div>
+                <?php
+                if (empty($guest->stripe_id)) {?>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="sendViaStripe" name="sendViaStripe">
+                        <label class="form-check-label" for="sendViaStripe">Send invoice via stripe?</label>
+                    </div>
+                <?php } ?>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Checkout</button>

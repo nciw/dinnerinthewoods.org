@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                     <div class="form-group">
-                        <label for="inputEnhancers">How many enhancers packs are given (10 per pack)?</label>
+                        <label for="inputEnhancers">How many enhancers sold (these are single tickets)?</label>
                         <input type="number" class="form-control" id="inputEnhancers" name="enhancerQty" value="0">
                         <input type="hidden" class="form-control" id="inputGuestId" name="guestId" value="0">
                     </div>
@@ -79,6 +79,7 @@
                                     <a class="dropdown-item" href="/admin/guest/add-card/<?=$guest->id?>">Add Credit Card</a>
                                 <?php } else { ?>
                                     <a class="dropdown-item" href="/admin/guest/delete-card/<?=$guest->id?>">Delete Credit Card</a>
+                                    <a class="dropdown-item" href="https://dashboard.stripe.com/customers/<?=$guest->stripe_id?>">View in Stripe</a>
                                 <?php } ?>
                                 <a class="dropdown-item" href="/admin/guest/checkout/<?=$guest->id?>">Checkout</a>
 

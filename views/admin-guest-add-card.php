@@ -9,7 +9,7 @@
             </div>
         <?php }?>
         <h3 class="mb-3">Add Credit Card</h3>
-        <form method="POST">
+        <form class="needs-validation" novalidate method="POST" id="payment-form">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="inputName">Name</label>
@@ -20,6 +20,7 @@
                     <label for="inputEmail">Email</label>
                     <input type="input" class="form-control" id="inputEmail" name="email" value="<?=$guest->email?>">
                 </div>
+                <input type="hidden" id="check" value="checked">
 
                 <div id="card-element">
                     <!-- A Stripe Element will be inserted here. -->

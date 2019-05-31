@@ -1,5 +1,13 @@
 <div class="row">
     <div class="col-md-12 order-md-1">
+        <?php
+        if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
+            <div class="alert alert-success" role="alert"><?=$_GET['msg']?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php }?>
         <h3 class="mb-3">Add Credit Card</h3>
         <form method="POST">
             <div class="modal-body">

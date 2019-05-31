@@ -164,7 +164,7 @@ $router->get('/admin/guest/delete-card/{id}', function ($id) {
     $guest->stripe_id = null;
     R::store($guest);
 
-    header('Location: /admin/guest/list?alert=success&msg=Credit card deleted '.$guest->name);
+    header('Location: /admin/guest/add-card/' . $guest->id . '?alert=success&msg=Credit card deleted '.$guest->name);
 
 });
 

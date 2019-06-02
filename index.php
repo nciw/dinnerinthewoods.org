@@ -262,7 +262,7 @@ $router->post('/admin/guest/checkout/{id}', function ($id) {
                 'currency' => 'usd',
                 'customer' => $guest->stripe_id,
             ]);
-            $guest->checkout_stripe_id = $charge;
+            $guest->checkout_stripe_id = $charge->id;
         }
 
         $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);

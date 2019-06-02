@@ -94,6 +94,33 @@ $router->get('/admin/orders', function () {
     include 'views/common/footer.php';
 });
 
+$router->get('/admin/send-survey', function () {
+    $guests = R::findAll('guests', ' order by name asc ');
+    $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
+
+    foreach ($guests as $guest) {
+        try {
+            $client->sendEmailWithTemplate(
+                $_SERVER['POSTMARK_FROM'],
+                $guest->email,
+                $_SERVER['POSTMARK_SURVEY_TEMPLATE'],
+                [
+                    'name' => $guest->name,
+                    'product_name' => 'Dinner in the Woods ' . date('Y'),
+                ],
+                true, //inline css
+                null, //tag
+                true, //track opens
+                null, //reply to
+                null //cc
+            );
+            echo 'Sent email to ' . $guest->email . '<br/>';
+        } catch (Exception $e) {
+            echo 'FAILED to send email to ' . $guest->email . '<br/>';
+        }
+    }
+});
+
 $router->get('/admin/guests/export', function () {
     R::csv('SELECT * FROM guests', [], [
         'id',

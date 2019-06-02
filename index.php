@@ -235,6 +235,7 @@ $router->post('/admin/guest/checkout/{id}', function ($id) {
                 'currency' => 'usd',
                 'customer' => $guest->stripe_id,
             ]);
+            $guest->checkout_stripe_id = $charge;
         }
 
         $client = new Postmark\PostmarkClient($_SERVER['POSTMARK_API_KEY']);
@@ -253,6 +254,8 @@ $router->post('/admin/guest/checkout/{id}', function ($id) {
             null, //reply to
             null //cc
         );
+
+        R::store($guest);
 
         header('Location: /admin/guest/list/?action=success&msg=Charge created for ' . $guest->name);
 

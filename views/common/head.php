@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dinner in the Woods 2019 - Tickets on sale March 15th!</title>
+    <title>Dinner in the Woods 2020 - Tickets on sale March 15th!</title>
 
     <script src="https://js.stripe.com/v3/"></script>
     <!-- Bootstrap core CSS -->

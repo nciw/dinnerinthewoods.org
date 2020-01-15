@@ -500,7 +500,7 @@
                         <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-cell" align="center">
-                                    <p class="sub align-center">&copy; 2019 Nature's Classroom of Wisconsin, All rights reserved.</p>
+                                    <p class="sub align-center">&copy; 2020 Nature's Classroom of Wisconsin, All rights reserved.</p>
                                     <p class="sub align-center"> Nature's Classroom of Wisconsin<br/>
                                         PO Box 660<br/>
                                         Mukwonago, WI 53149

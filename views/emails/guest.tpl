@@ -410,12 +410,12 @@
                                 <td class="content-cell">
                                     <h1>Hi {{guest_name}},</h1>
                                     <p>You've been invited to Dinner in the Woods by {{from_name}}! This email confirms you as a guest and allows you to manage your profile to make for a more pleasant experience at the event.</p>
-                                    <p>Dinner in the Woods is on Saturday, June 1st, 2019 from 5:00pm to 11:30pm and is hosted at <a href="https://goo.gl/maps/LQPvQf9Ndh82">Natures Classroom Institute of Wisconsin</a>. We hope you'll enjoy the live music, local food, and live & silent auctions the day of the event!</p>
+                                    <p>Dinner in the Woods is on Saturday, June 20th, 2020 from 5:00pm to 11:30pm and is hosted at <a href="https://goo.gl/maps/LQPvQf9Ndh82">Natures Classroom Institute of Wisconsin</a>. We hope you'll enjoy the live music, local food, and live & silent auctions the day of the event!</p>
 
                                     <p>As we get closer to the event we will send reminders and more details. </p>
                                     <p></p><i>If you cannot attend please let your host know.</i> {{from_name}} invited you and their email is <a href="mailto:{{from_email}}">{{from_email}}</a></p>
 
-                                    <p>If you have any questions about the event or schol, simply reply to this email for help.</p>
+                                    <p>If you have any questions about the event or school, simply reply to this email for help.</p>
                                     <p>Gratefully,
                                         <br>Nature’s Classroom Institute and Montessori School</p>
                                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
@@ -449,7 +449,7 @@
                         <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-cell" align="center">
-                                    <p class="sub align-center">&copy; 2019 Nature's Classroom of Wisconsin, All rights reserved.</p>
+                                    <p class="sub align-center">&copy; 2020 Nature's Classroom of Wisconsin, All rights reserved.</p>
                                     <p class="sub align-center"> Nature's Classroom of Wisconsin<br/>
                                         PO Box 660<br/>
                                         Mukwonago, WI 53149

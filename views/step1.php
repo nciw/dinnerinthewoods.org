@@ -1,5 +1,5 @@
 <?php
-$aprilIncrease = new DateTime('4/1/2019', new DateTimeZone('America/Chicago'));
+$aprilIncrease = new DateTime('4/1/2020', new DateTimeZone('America/Chicago'));
 $now = new DateTime('now', new DateTimeZone('America/Chicago'));
 
 $interval = $now->diff($aprilIncrease);

@@ -58,10 +58,10 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
-            </li>
+            </li><!--
             <li class="nav-item">
                 <a class="nav-link" href="/assets/update.pdf">Updates</a>
-            </li>
+            </li>-->
             <li class="nav-item">
                 <a class="nav-link" href="/gallery">Gallery</a>
             </li>

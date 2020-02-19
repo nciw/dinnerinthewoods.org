@@ -47,14 +47,6 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                                 <td>A Pack of 10 Ticket Enhancers</td>
                                 <td>$<?=$_SERVER['ENHANCER_TICKET_PRICE']?></td>
                             </tr>
-                            <tr>
-                                <td>Cabana</td>
-                                <td>$<?=$_SERVER['CABANA_PRICE']?></td>
-                            </tr>
-                            <tr>
-                                <td>Childcare (per child)</td>
-                                <td>$<?=$_SERVER['CHILDCARE_PRICE']?></td>
-                            </tr>
                         </table>
 
                     </small>
@@ -82,19 +74,6 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                         <br/>Drinks - 4 tickets
                         <br/>Wine Pull - 3 tickets
                         <br/>Egg Pull - 2 tickets
-                    </small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                    <h6 class="my-0">What is Included with a Cabana?</h6>
-                    <small class="text-muted">This private, after dinner party area will be available for you and your party to enjoy a pitcher of our signature cocktail and a gourmet dessert. Each cabana can host up to 8 family members/friends.</small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                    <h6 class="my-0">What is Included in Childcare?</h6>
-                    <small class="text-muted">Childcare is only offered to NCI-MS enrolled students and their families. Childcare will include pizza and a dessert.
                     </small>
                 </div>
             </li>
@@ -132,21 +111,6 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                 <label for="enhancerTickets">How many packs of ticket enhancers would you like?</label>
                 <p class="text-muted">$<?=$_SERVER['ENHANCER_TICKET_PRICE']?> per pack. Sold in packs of 10 tickets.</p>
                 <input type="number" class="form-control" id="ticketEnhancerQty" name="ticketEnhancerQty">
-            </div>
-            <div class="mb-3">
-                <label for="cabanaReservation">Would you like to reserve a cabana?</label>
-                <p class="text-muted">Private cabanas available for $<?=$_SERVER['CABANA_PRICE']?></p>
-
-                <div class="d-block my-3">
-                    <div class="custom-control custom-radio">
-                        <input id="yes" name="cabanaReservation" type="radio" value="0" checked required>
-                        <label for="no">No</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input id="yes" name="cabanaReservation" type="radio" value="1" required>
-                        <label for="yes">Yes</label>
-                    </div>
-                </div>
             </div>
             <div class="mb-3">
                 <label for="enhancerTickets">Would you like to make a one-time contribution to support our mission

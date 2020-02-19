@@ -3,7 +3,7 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/lODWa6DkDaU?rel=0&amp;showinfo=0"
             frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
-    <h5>Saturday June 6th, 2020 5:00pm-11:30pm</h5>
+    <h5>Saturday May 30th, 2020 5:00pm-11:30pm</h5>
     <h5>W336 S8455 Hwy E, Mukwonago, WI 53149</h5>
 
 </div>

@@ -43,8 +43,8 @@
                 "name": "Nature's Classroom Institute of Wisconsin"
             },
             "name": "Dinner in the Woods",
-            "startDate": "2020-06-06T16:00-06:00",
-            "endDate": "2020-06-06T00:00-06:00",
+            "startDate": "2020-05-30T16:00-06:00",
+            "endDate": "2020-05-30T00:00-06:00",
             "isAccessibleForFree": false,
             "remainingAttendeeCapacity": 400,
             "maximumAttendeeCapacity": 400,

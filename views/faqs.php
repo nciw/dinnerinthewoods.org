@@ -20,10 +20,7 @@
         <p>For each Wine Pull ticket you purchase(=5 ticket enhancers)  you will "pull" (select) a mystery bottle of wine  (valued at least at $10) to take home.</p>
         <h4>What is the Egg Pull?</h4>
         <p>For each Egg Pull ticket  you purchase (=2  ticket enhancers)  you have the chance to win XXX Dozen of eggs from our farm! Chicken and turkey eggs are up for your chance to win!</p>
-        <h4>What is a Cabana?</h4>
-        <p>Once the main festivities are complete for the evening, the band and dancing will officially begin and some guests have enjoyed moving to a cabana for a special dessert and cocktail.
-            Relax there and enjoy the evening under the stars! Purchase of a cabana entitles you to a pitcher of our signature Dinner In The Woods cocktail and a gourmet dessert.</p>
-        <h4> Are dietary restrictions accommodated?</h4>
+       <h4> Are dietary restrictions accommodated?</h4>
         <p>We have a vegan meal option available. When your ticket or table was purchased this may have already been selected. If you are not sure or know that it was not indicated,
             please email <a href="mailto:deepa@nciw.org">deepa@nciw.org</a> to ensure we have this counted in our planning.
         </p>

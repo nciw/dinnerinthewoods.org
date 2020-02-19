@@ -130,7 +130,7 @@ function shoppingCartTotal($price)
 function checkIfTicketsAreOnSale()
 {
     $todaysDate = new DateTime('now', new DateTimeZone('America/Chicago'));
-    $dateOnSale = new DateTime('3/15/2020 8:00am', new DateTimeZone('America/Chicago'));
+    $dateOnSale = new DateTime('2/15/2020 8:00am', new DateTimeZone('America/Chicago'));
     $interval = $todaysDate->diff($dateOnSale);
 
     if ($interval->days >= 0 && $interval->invert === 0) {

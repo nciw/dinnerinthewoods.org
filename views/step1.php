@@ -27,7 +27,7 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
 <div class="row">
     <div class="col-md-4 order-md-1 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">FAQs</span>
+            <span class="text-muted">Event Information</span>
         </h4>
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">

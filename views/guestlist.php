@@ -32,17 +32,11 @@ if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
                     <label for="lastName">Phone</label>
                     <input name="guests[<?=$guest->id?>][phone]" type="text" class="form-control" id="phone" value="<?=$guest->phone?>">
                 </div>
-                <div class="col-md-2 mb-3">
-                    <label for="childcare">Childcare?</label>
-                    <select class="form-control" name="guests[<?=$guest->id?>][childcare]">
-                        <option value="0" <?php if (false == $guest->childcare) { echo 'selected'; } ?>>No</option>
-                        <option value="1" <?php if (true == $guest->childcare) { echo 'selected'; } ?>>Yes</option>
-                    </select>
-                </div>
                 <div class="col-md-4 mb-3">
                     <label for="restrictions">Food preferences?</label>
                     <select class="form-control" name="guests[<?=$guest->id?>][restrictions]">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>
+                        <option value="3" <?php if (3 == $guest->restrictions) { echo 'selected'; } ?>>Gluten Free</option>
                         <option value="1" <?php if (1 == $guest->restrictions) { echo 'selected'; } ?>>Vegetarian</option>
                         <option value="2" <?php if (2 == $guest->restrictions) { echo 'selected'; } ?>>Vegan</option>
                     </select>

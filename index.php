@@ -18,7 +18,6 @@ $dotenv->required([
     'EVENT_TICKET_PRICE_2',
     'EVENT_TICKET_PRICE_3',
     'ENHANCER_TICKET_PRICE',
-    'CHILDCARE_PRICE',
     'CABANA_PRICE',
     'DB_HOST',
     'DB_NAME',
@@ -130,7 +129,7 @@ $router->get('/admin/guests/export', function () {
         'phone',
         'childcare? (0=no, 1=yes)',
         'valet? (0=no, 1=yes)',
-        'food restrictions? (0=no, 1=vegetarian, 2=vegan)',
+        'food restrictions? (0=no, 1=vegetarian, 2=vegan, 3=gluten)',
         'table',
         'paddle',
         'stripe_id',
@@ -593,7 +592,6 @@ $router->post('/guest/{uuid}', function ($uuid) {
     }
 
     $guest->phone = $_POST['phone'];
-    $guest->childcare = $_POST['childcare'];
     $guest->restrictions = $_POST['restrictions'];
     R::store($guest);
     header('Location: /guest/' . $guest->uuid . '?alert=success');
@@ -657,7 +655,6 @@ $router->post('/manage/{uuid}', function ($uuid) {
             }
             $guest->email = $_POST['guests'][$id]['email'];
             $guest->phone = $_POST['guests'][$id]['phone'];
-            $guest->childcare = $_POST['guests'][$id]['childcare'];
             $guest->restrictions = $_POST['guests'][$id]['restrictions'];
             R::store($guest);
 

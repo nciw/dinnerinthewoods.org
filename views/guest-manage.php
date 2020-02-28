@@ -7,8 +7,7 @@ if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
 <div class="row">
     <div class="col-md-12 order-md-1">
         <h3 class="mb-3">Your information</h3>
-        <p>Note: childcare is only available for NCM families for $25/child. Payment will be taken on the day of the event.</p>
-        <form class="needs-validation" novalidate method="POST" id="payment-form">
+         <form class="needs-validation" novalidate method="POST" id="payment-form">
         <input type="hidden" name="uuid" value="<?=$guest->uuid?>">
 
         <h5 class="mb-3"><?=$guest->name?> <small><?=(empty($guest->table)) ? '' : 'Table #' . $guest->table; ?><?=(empty($guest->paddle)) ? '' : ', Paddle #' . $guest->paddle; ?></small></h5>
@@ -17,17 +16,11 @@ if (isset($_GET['alert']) && $_GET['alert'] == 'success') { ?>
                     <label for="lastName">Phone</label>
                     <input name="phone" type="text" class="form-control" id="phone" value="<?=$guest->phone?>">
                 </div>
-                <div class="col-md-2 mb-3">
-                    <label for="childcare">Childcare?</label>
-                    <select class="form-control" name="childcare">
-                        <option value="0" <?php if (false == $guest->childcare) { echo 'selected'; } ?>>No</option>
-                        <option value="1" <?php if (true == $guest->childcare) { echo 'selected'; } ?>>Yes</option>
-                    </select>
-                </div>
                 <div class="col-md-4 mb-3">
                     <label for="restrictions">Food preferences?</label>
                     <select class="form-control" name="restrictions">
                         <option value="0" <?php if (0 == $guest->restrictions) { echo 'selected'; } ?>>None</option>
+                        <option value="3" <?php if (3 == $guest->restrictions) { echo 'selected'; } ?>>Gluten Free</option>
                         <option value="1" <?php if (1 == $guest->restrictions) { echo 'selected'; } ?>>Vegetarian</option>
                         <option value="2" <?php if (2 == $guest->restrictions) { echo 'selected'; } ?>>Vegan</option>
                     </select>

@@ -5,7 +5,7 @@ $now = new DateTime('now', new DateTimeZone('America/Chicago'));
 $interval = $now->diff($aprilIncrease);
 if ($interval->invert == 0) { ?>
 <div class="alert alert-warning" role="alert">
-    Pricing increases on April 1st! Buy tickets now!
+    <strong>Buy your tickets now!</strong> Pricing increases on April 1st!
 </div>
 <?php
 }

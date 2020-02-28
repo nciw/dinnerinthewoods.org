@@ -55,7 +55,7 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
                     <h6 class="my-0">What is Included with a Ticket?</h6>
-                    <small class="text-muted">The purchase of your ticket includes entrance into the event, appetizers, dinner and dessert.
+                    <small class="text-muted">The price of your ticket includes entrance into the event, appetizers, dinner and dessert.
                     </small>
                 </div>
             </li>
@@ -71,8 +71,8 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                     <small class="text-muted">Ticket enhancers can be used for drinks, the Egg Pull and the Wine Pull.
                         Each pack includes 10 tickets. Here is a breakdown of the cost for each item to help guide
                         how many packs of ticket enhancers you will need for the event:<br/>
+                        <br/>Wine Pull - 5 tickets
                         <br/>Drinks - 4 tickets
-                        <br/>Wine Pull - 3 tickets
                         <br/>Egg Pull - 2 tickets
                     </small>
                 </div>

@@ -44,7 +44,7 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                                 <td>$<?=$_SERVER['TABLE_TICKET_PRICE']?></td>
                             </tr>
                             <tr>
-                                <td>A Pack of 10 Ticket Enhancers</td>
+                                <td style="padding-right: 3px">A Pack of 10 Ticket Enhancers</td>
                                 <td>$<?=$_SERVER['ENHANCER_TICKET_PRICE']?></td>
                             </tr>
                         </table>

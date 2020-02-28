@@ -11,8 +11,8 @@
         <h4>Parking</h4>
         <p>Through a generous donation from one of our supporters, valet parking will be provided again this year. Please pull up the driveway until you see the attendants.</p>
         <h4>School and Farm tours</h4>
-        <p>We are most proud of our school and our students who make this space so special. We would love to show you our facility and are offering tours
-            at 6:00 p.m. and 6:30 p.m. If you would like to come along for a tour please meet by the front school doors at either of those times.</p>
+        <p>We are most proud of our school and our students who make this space so special. We would love to show you our facility and are offering a tour
+            beginning at 6:00 p.m. If you would like to come along for a tour please meet by the front school doors at that time.</p>
         <h4>What are Ticket Enhancers?</h4>
         <p>Ticket Enhancers are the way to get in on more fun throughout the evening. You can spend these at the bar, for chances at our raffle items
             or for the wine and egg pull. Ticket enhancers are $2 each and sold in packs of 10 ($20).</p>

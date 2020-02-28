@@ -67,7 +67,7 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">What are Ticket Enhancers For?</h6>
+                    <h6 class="my-0">What are Ticket Enhancers for?</h6>
                     <small class="text-muted">Ticket enhancers can be used for drinks, the Egg Pull and the Wine Pull.
                         Each pack includes 10 tickets. Here is a breakdown of the cost for each item to help guide
                         how many packs of ticket enhancers you will need for the event:<br/>
@@ -81,7 +81,7 @@ if (isset($_GET['error']) && $_GET['error'] == 'tickets') { ?>
                 <div>
                     <h6 class="my-0">Where is the Event?</h6>
                     <small class="text-muted">
-                        The event is hosted at Nature's Classroom and located at<br/>
+                        The event is hosted at Nature's Classroom Institute and Montessori School and is located at<br/>
                         <a href="https://goo.gl/maps/LQPvQf9Ndh82" target="_blank">
                             W336 S8455 Hwy E<br/>Mukwonago, WI 53149
                         </a>
